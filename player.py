@@ -36,3 +36,21 @@ class Player:
             temp.sort(reverse=True)
             temp.pop(-1)
             self.top_scores = tuple(temp)
+
+
+    def roll(self):
+        """Return number rolled."""
+        return dice.Dice().roll(self.is_cheating)
+
+    def add_losses(self):
+        """Call this method adds 1 value to player losses."""
+        self.losses += 1
+
+    def show_statistics(self):
+        """Return a list of necessary variables."""
+        return [self.username, self.top_scores, self.wins, self.losses]
+
+    def reset(self):
+        """Reset player points, turns cheats off."""
+        self.points_held = 0
+        self.is_cheating = False
