@@ -285,3 +285,166 @@ class Shell(cmd.Cmd):
     def scores(self):
         """Return player scores."""
         return [self.game.player_1.points_held, self.game.player_2.points_held]
+
+    
+    def do_choose(self, arg):
+        """Choose difficulty level."""
+        if not arg:
+            print(">> Missing argument!")
+        else:
+            if self.game.position == "menu":
+                if arg == '1':
+                    self.game.can_login = self.game.can_create = True
+                    msg1 = ">> Enter <login> or <create> followed "
+                    msg2 = "by your username and password"
+                    print(msg1 + msg2)
+                elif arg == '2':
+                    self.game.set_computer()
+                    msg1 = "\nBeep, beep, boops! "
+                    msg2 = "Computer gonna pwn some noobs!\n"
+                    print(msg1 + msg2)
+                    self.game.position = "computer_menu"
+                    print("Please select a difficulty")
+                    print("__________________________")
+                    print("choose 1              Easy")
+                    print("choose 2            Normal")
+                    print("choose 3              Hard\n")
+                else:
+                    print(self.game.err_msg())
+            elif self.game.position == "computer_menu":
+                if arg >= '1' and arg <= '3':
+                    self.game.clear_screen()
+                    self.game.curr_player == self.game.player_1
+                    if arg == '1':
+                        print(self.game.set_computer_difficulty("easy"))
+                    elif arg == '2':
+                        print(self.game.set_computer_difficulty("normal"))
+                    elif arg == '3':
+                        print(self.game.set_computer_difficulty("hard"))
+                    print("\n" + self.game.show_rules())
+                    self.game.start_reset_restart()
+                    print(self.game.scores())
+                    msg1 = "You may type help to view a list of "
+                    msg2 = "all available commands"
+                    print(msg1 + msg2 + "\n")
+                else:
+                    print(self.game.err_msg())
+            else:
+                print("No choices are currently being presented\n")
+
+    def do_cheat(self, _):
+        """Activate cheat."""
+        if self.game.position == "rules" and self.game.player_2.username != "":
+            pass
+        else:
+            print(self.game.err_msg())
+            return
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player != game.Game.player_1
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = self.game.curr_player != game.Game.player_2
+        if self.bool:
+            self.game.curr_player.is_cheating = True
+            print("Cheater!!!.")
+            print(">> setting Highscores has been disabled for this round <<")
+            print(">>>>>>>>>>>>>>> You can no longer roll 1 <<<<<<<<<<<<<<<<")
+            print("\n")
+        else:
+            print(self.game.err_msg())
+
+    def do_restart(self, _):
+        """Restart running game."""
+        self.bool = (self.game.player_2.username != "")
+        if self.bool:
+            self.game.start_reset_restart()
+            self.game.clear_screen()
+            print(">> Game restarted.".format())
+            print("\n" + self.game.show_rules())
+            print(self.game.scores())
+        else:
+            print(self.game.err_msg())
+
+    def do_re(self, _):
+        """Call do_restart to restart the game."""
+        return self.do_restart(_)
+
+    def do_stats(self, arg):
+        """Show player statistics."""
+        if self.game.player_1.username == "":
+            print(">>  No user is currently logged in.\n")
+            return
+        self.bool = False
+        player = None
+        p1n = self.game.player_1.username
+        p2n = self.game.player_2.username
+        arg = arg.split(" ")
+        arg = arg[0]
+
+        if len(arg) == 0 or arg.lower() == "p1" or arg.lower() == p1n.lower():
+            player = self.game.player_1
+        elif arg.lower() == "p2" or arg.lower() == p2n.lower():
+            if p2n.lower() != "computer":
+                if p2n != "":
+                    player = self.game.player_2
+                elif p2n == " ":
+                    player = self.game.player_1
+                else:
+                    print(f">>  {p2n} is not currently logged in!\n")
+                    return
+            else:
+                print(">>  Computer has no statistics!\n")
+                return
+        else:
+            m = 'Stats retrieval failed. '
+            m2 = 'Please check if the user is logged in and try again.\n'
+            print(m + m2)
+            return
+
+        if player is not None:
+            self.bool = True
+
+        if self.bool:
+            stats = player.show_statistics()
+            name = stats[0]
+            scores = stats[1]
+            wins = stats[2]
+            losses = stats[3]
+            q = "___________________________________________"
+            txt = f"Player statistics for {name}"
+            print(f"{q}\n\n{txt.center(len(q))}\n{q}\n")
+
+            print("> Player Top Scores:")
+            for i in range(0, len(scores)):
+                print(f"\t{i + 1}.  {scores[i]} points")
+            print(f"> Player Wins: {wins}")
+            print(f"> Player Losses: {losses}")
+            print("\n\n")
+        else:
+            print(self.game.err_msg())
+
+    def do_leaderboards(self, _):
+        """Print leaderboard."""
+        q = "___________________________________________"
+        txt = "Pig Game Leaderboards"
+        print(f"{q}\n\n{txt.center(len(q))}\n{q}\n")
+        for i in range(0, len(self.game.get_scoreboard())):
+            print("  {}{} ".format(i + 1, '.'), end=" ")
+            obj = self.game.get_scoreboard()[i]
+            name = obj.username
+            score = obj.points_held
+            if name == "" or obj.points_held == 0:
+                name = "Empty slot"
+            print("{:15s}".format(name), end="")
+            print(end="|\t\t" if name != "Empty slot" else "\n")
+            if name != "Empty slot":
+                print(f"{score} points")
+        print()
+
+    def do_leaderboard(self, _):
+        """Run do_leaderboards()."""
+        return self.do_leaderboards(_)
+
+    def do_lb(self, _):
+        """Run do_leaderboards()."""
+        return self.do_leaderboards(_)
