@@ -31,3 +31,12 @@ clean:
 	rm -f .coverage *.pyc
 	rm -rf __pycache__
 	rm -rf htmlcov
+
+clean-doc:
+	rm -rf doc
+
+clean-all: clean clean-doc
+	rm -rf .venv
+
+unittest:
+	$(PYTHON) -m unittest discover . "*_test.py"
