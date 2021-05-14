@@ -24,9 +24,9 @@ The game has a cheat mode, when activated player will not roll a 1 until end of 
 When player activates cheat mode their new top score will not be added to the list.
 
 It can be played in singular mode or versus a computer with three difficulty levels
-1. easy
-2. normal
-3. hard
+1. Easy
+2. Normal
+3. Hard
 
 
 ## Structure of the game: -
@@ -137,3 +137,5 @@ Execute coverage report:
 
 Execute coverage and generate html:
     -- coverage html
+
+Thank You!!!
