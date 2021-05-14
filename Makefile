@@ -88,3 +88,5 @@ radon-hal:
 
 bandit:
 	bandit -r .
+
+lint: flake8 pylint
