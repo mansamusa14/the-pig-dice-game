@@ -448,3 +448,33 @@ class Shell(cmd.Cmd):
     def do_lb(self, _):
         """Run do_leaderboards()."""
         return self.do_leaderboards(_)
+
+    
+    def do_rules(self, _):
+        """Print rules."""
+        position = self.game.position
+        print(self.game.show_rules())
+        self.game.position = position
+        return
+
+    def do_exit(self, _):
+        """Terimnate game."""
+        return self.do_quit(_)
+
+    def do_e(self, _):
+        """Run do_exit()."""
+        return self.do_exit(_)
+
+    def do_clear(self, _):
+        """Clear screen."""
+        if self.game.player_1.username != "":
+            self.game.clear_screen()
+            print(">>  Screen cleared!")
+            if self.game.position == "menu":
+                print(self.game.show_menu())
+            elif self.game.position == "rules":
+                print(self.game.show_rules())
+                print(self.game.scores())
+        else:
+            return print(self.game.err_msg())
+
