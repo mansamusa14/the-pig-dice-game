@@ -84,3 +84,7 @@ radon-raw:
 
 radon-hal:
 	radon hal .
+
+
+bandit:
+	bandit -r .
