@@ -215,3 +215,85 @@ class Game():
                 computer.Computer.reset_action_pool(computer.Computer)
         return self.curr_player
 
+    def reset_curr_points(self):
+        """Reset the current points tally."""
+        self.curr_points = 0
+
+    def create_screen(self):
+        """Instructions for creating a new account."""
+        return "Enter <create> followed by a username and password"
+
+    def clear_screen(self):
+        """Clear the game-screen."""
+        subprocess.run(
+            "cls" if platform.system() == "Windows" else "clear", shell=True
+            )
+        return
+
+    def update(self):
+        """Test that user scores are updated correctly."""
+        if self.curr_player.username != "Computer":
+            self.curr_player.set_highscore()
+            leaderboards.Leaderboards.update(
+                leaderboards.Leaderboards, self.curr_player
+                )
+            return True
+        else:
+            return False
+
+    def get_scoreboard(self):
+        """Return scoreboard."""
+        return leaderboards.Leaderboards.scoreboard
+
+    def err_msg(self):
+        """Print error message."""
+        flav = random.choice(self.error_msg_flavor)
+        return self.error_msg.format(flav) + "\n"
+
+    def scores(self):
+        """Present current scores."""
+        msg = "\t\t\t[ {} : {} points || {} : {} points ]\n"
+        msg = msg.format(
+            self.player_1.username,
+            self.player_1.points_held,
+            self.player_2.username,
+            self.player_2.points_held
+            )
+        return msg
+
+    def writer(self):
+        """Write to file."""
+        return synchronization.Sync().pickle_write()
+
+    def reader(self):
+        """Read from file."""
+        return synchronization.Sync().pickle_read()
+
+    def set_filepath(self, file, path):
+        """Set path to files."""
+        if file == 'file1':
+            synchronization.Sync.file1 = path
+        elif file == 'file2':
+            synchronization.Sync.file2 = path
+
+    def set_computer(self):
+        """Access static computer and assign as player_2."""
+        self.player_2 = computer.Computer
+
+    def set_computer_difficulty(self, difficulty):
+        """Set computer difficulty to that which is specified by the user."""
+        msg = f"You successfully have selected {difficulty} difficulty!"
+        computer.Computer.difficulty = difficulty
+        return msg
+
+    def comp_choice(self):
+        """Retrieve an action from the computer's action_pool attribute."""
+        action = random.choice(computer.Computer.action_pool)
+
+        """ replace a roll with hold in action_pool(+5% chance to hold) """
+        for option in computer.Computer.action_pool:
+            if option == "roll":
+                option == "hold"
+                break
+        return action
+
