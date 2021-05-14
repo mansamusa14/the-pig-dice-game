@@ -37,7 +37,7 @@ class Player:
             temp.pop(-1)
             self.top_scores = tuple(temp)
 
-
+    
     def roll(self):
         """Return number rolled."""
         return dice.Dice().roll(self.is_cheating)
