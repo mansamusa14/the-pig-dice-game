@@ -1,0 +1,1773 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>development.shell API documentation</title>
+<meta name="description" content="Provide full functionality from the command line." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>development.shell</code></h1>
+</header>
+<section id="section-intro">
+<p>Provide full functionality from the command line.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Provide full functionality from the command line.&#34;&#34;&#34;
+
+import cmd
+from error_handling.user_not_found import UserNotFound
+import game
+from error_handling.already_exists import AlreadyExists
+from time import sleep
+
+
+class Shell(cmd.Cmd):
+    &#34;&#34;&#34;Response to do_something in terminal window.&#34;&#34;&#34;
+
+    intro = &#39;Type help to see a list of commands\n&#39;
+    prompt = &#39;(game) &#39;
+    bool = False
+
+    def __init__(self):
+        &#34;&#34;&#34;Construct and initialise on instancing this class.&#34;&#34;&#34;
+        game.Game.set_filepath(game.Game, &#39;file1&#39;, &#39;data/users.pickle&#39;)
+        game.Game.set_filepath(game.Game, &#39;file2&#39;, &#39;data/leaderboards.pickle&#39;)
+        super().__init__()
+        try:
+            self.game = game.Game()
+        except FileNotFoundError:
+            game.Game.writer(game.Game)
+            self.game = game.Game()
+
+    def do_help(self, _):
+        &#34;&#34;&#34;Print help menu.&#34;&#34;&#34;
+        print(self.game.help()+&#34;\n&#34;)
+
+    def do_create(self, arg):
+        &#34;&#34;&#34;Create new instance of user.&#34;&#34;&#34;
+        name = self.game.curr_player.username
+        if self.game.can_create and (
+            self.game.position != &#34;rules&#34; or name == &#34;&#34;
+                ):
+            if len(arg.split(&#34; &#34;)) &gt;= 2:
+                try:
+                    arg = arg[0].upper() + arg[1:]
+                    if self.game.create_player(arg):
+                        msg = &#34;Player creation successful! Logging you in now!&#34;
+                        print(msg)
+                        self.game.writer()
+                        self.do_login(arg)
+                    else:
+                        msg1 = &#34;That username is not allowed! &#34;
+                        msg2 = &#34;Please pick another...&#34;
+                        print(msg1 + msg2 + &#34;\n&#34;)
+                except AlreadyExists as error:
+                    print(error.msg + &#34;\n&#34;)
+            else:
+                print(&#34;Arguments are missing. Please try again&#34;)
+        else:
+            print(&#34;Pig ate a lot of truffles and can&#39;t do that right now...&#34;)
+            print()
+
+    def do_login(self, arg):
+        &#34;&#34;&#34;Log into existing account.&#34;&#34;&#34;
+        arg = arg.split(&#34; &#34;)  # split additional parameters apart
+        name = self.game.curr_player.username
+        if len(arg) &gt;= 2:
+            pass
+        else:
+            print(&#34;Missing arguments!&#34;)
+            return
+
+        if self.game.can_create and (
+            self.game.position != &#34;rules&#34; or name == &#34;&#34;
+                ):
+            try:
+                if self.game.login(arg):
+                    arg = arg[0]  # discard of extra parameters
+                    arg = arg[0].upper() + arg[1:]  # uppercase 1st letter
+                    self.game.clear_screen()
+                    msg = &#34;\nLogin successful! Welcome {}&#34;
+                    n = self.game.curr_player.username
+                    print(msg.format(arg), end=&#34;. &#34; if n != &#34;&#34; else &#34;\n&#34;)
+                    if n != &#34;&#34;:
+                        print(f&#34;{arg} has been set as Player 2.\n\n&#34;)
+                        print(&#34;\n&#34; + self.game.show_rules())
+                        self.game.start_reset_restart()
+                        print(self.game.scores())
+                    else:
+                        self.game.curr_player = self.game.player_1
+                        p1n = self.game.curr_player.username
+                        self.prompt = f&#34;(game)({p1n}) &#34;
+                        self.game.can_create = False
+                        print(self.game.show_menu())
+            except UserNotFound as error:
+                print(error.msg)
+        else:
+            msg1 = &#34;Pig has deemed you unworthy of logging &#34;
+            msg2 = &#34;in to another account right now...\n&#34;
+            print(msg1+msg2)
+
+    def do_namechange(self, arg):
+        &#34;&#34;&#34;Change username of player.&#34;&#34;&#34;
+        if len(arg) &gt; 0:
+            pass
+        else:
+            print(&#34;Missing arguments!&#34;)
+        arg = arg[0].upper() + arg[1:]
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player.username != &#34;&#34;
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = (self.game.curr_player.username != &#34;&#34;)
+        if self.bool:
+            try:
+                new_name = self.game.namechange(arg)
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1.username = new_name
+                else:
+                    self.game.player_2.username = new_name
+                self.game.clear_screen()
+                print(&#34;\n&gt;&gt; Name updated.&#34;)
+                if self.game.position == &#34;menu&#34;:
+                    print(self.game.show_menu())
+                elif self.game.position == &#34;rules&#34;:
+                    print(self.game.show_rules())
+                    print(self.game.scores())
+                p1n = self.game.curr_player.username
+                self.prompt = f&#34;(game)({p1n}) &#34;
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1 == self.game.curr_player
+                else:
+                    self.game.player_2 == self.game.curr_player
+                self.game.writer()
+            except AlreadyExists as error:
+                print(error.msg)
+        else:
+            print(&#34;You can not change your name mid-game.&#34;, end=&#34; &#34;)
+            print(&#34;Consider resetting the game (/re or /reset)&#34;)
+
+    def do_roll(self, _):
+        &#34;&#34;&#34;Roll dice.&#34;&#34;&#34;
+        if self.game.position == &#39;menu&#39;:
+            return print(self.game.err_msg())
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player.username != &#34;&#34;
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = (self.game.curr_player.username != &#34;&#34;)
+        if self.bool:
+            rolled = self.game.roll()
+            name = self.game.curr_player.username
+            points = self.game.curr_points
+            print(f&#34;&gt;&gt; {name} rolled &#34;, flush=True, end=&#34;&#34;)
+            sleep(0.2)
+            for _ in range(0, 3):
+                print(&#34;. &#34;, flush=True, end=&#34;&#34;)
+                sleep(0.2)
+            if rolled != 1:
+                print(f&#34;{rolled}! {name}&#39;s current score is {points}\n&#34;)
+            else:
+                msg1 = f&#34;{rolled}! Oh no, {name}&#39;s non-held points and &#34;
+                msg2 = &#34;turn have been forfeited.\n&#34;
+                print(msg1+msg2)
+                self.game.reset_curr_points()
+                self.game.next_player()
+                name = self.game.curr_player.username
+                self.prompt = f&#34;(game)({name}) &#34;
+                if name == &#34;Computer&#34;:
+                    self.computer_logic()
+        else:
+            print(self.game.err_msg())
+
+    def do_r(self, _):
+        &#34;&#34;&#34;Run do_roll().&#34;&#34;&#34;
+        return self.do_roll(_)
+
+    def do_hold(self, arg):
+        &#34;&#34;&#34;Hold current points in round.&#34;&#34;&#34;
+        if self.game.position == &#39;menu&#39;:
+            return print(self.game.err_msg())
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player.username != &#34;&#34;
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = (self.game.curr_player.username != &#34;&#34;)
+        if self.bool:
+            sleep(0.2)
+            self.game.clear_screen()
+            print(&#34;\n\n\n&#34; + self.game.show_rules())
+            arg = arg.split(&#34; &#34;)
+            arg = arg[0]
+            name = self.game.curr_player.username
+            points = self.game.curr_points  # curr points
+            hpoints = self.game.curr_player.points_held  # curr held points
+            self.game.curr_player.points_held = hpoints + points  # updating
+            total = self.game.curr_player.points_held
+            if self.update_won(name, total):
+                return
+            else:
+                print(self.game.scores())
+                msg1 = f&#34;&gt;&gt; {name} saved {points} points this round! &#34;
+                msg2 = f&#34;{name} now has a total of {total} points held!\n&#34;
+                self.game.reset_curr_points()
+                self.game.next_player()
+                name = self.game.curr_player.username
+                self.prompt = f&#34;(game)({name}) &#34;
+                print(msg1 + msg2)
+            if name == &#34;Computer&#34;:
+                self.computer_logic()
+        else:
+            print(self.game.err_msg())
+
+    def do_h(self, _):
+        &#34;&#34;&#34;Run do_hold().&#34;&#34;&#34;
+        return self.do_hold(_)
+
+    def update_won(self, name, total):
+        &#34;&#34;&#34;Check if won.&#34;&#34;&#34;
+        if self.game.has_won():
+            self.game.clear_screen()
+
+            &#34;&#34;&#34;write data if curr player is player obj.&#34;&#34;&#34;
+            if isinstance(self.game.curr_player, game.Game.curr_player):
+                self.game.curr_player.add_win()
+                if name == self.game.player_2.username:
+                    &#34;&#34;&#34; player 1 is always player obj&#34;&#34;&#34;
+                    self.game.player_2 = self.game.curr_player
+                    self.game.player_1.add_losses()
+                else:
+                    self.game.player_1 = self.game.curr_player
+                    if self.game.player_2.username != &#34;Computer&#34;:
+                        self.game.player_2.add_losses()
+                for player in self.game.list_players:
+                    if player.username == name:
+                        player = self.game.curr_player
+                self.game.update()
+                # self.game.curr_player.reset()
+                self.game.writer()
+                self.game.reader()
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1 = self.game.curr_player
+                elif self.game.curr_player == self.game.player_2:
+                    self.game.player_2 == self.game.curr_player
+            else:
+                self.game.player_1.add_losses()
+
+            &#34;&#34;&#34;reset player 2.&#34;&#34;&#34;
+            p2_msg = f&#34;{self.game.player_2.username} has been logged out!&#34;
+            self.game.player_2 = game.Game.player_2
+
+            &#34;&#34;&#34;Print victory message and reset main menu.&#34;&#34;&#34;
+            victory_msg = &#34;&gt;&gt;  Congratulations, {}! You won with {} points!&#34;
+            print(f&#34;\n\n{victory_msg.format(name, total)}&#34;)
+            print(f&#34;&gt;&gt;  {p2_msg}\n\n&#34;)
+            print(self.game.show_menu())
+            return True
+        else:
+            return False
+
+    def computer_logic(self):
+        &#34;&#34;&#34;Logic powering computer/AI decisions(can&#39;t be called by cmdloop).&#34;&#34;&#34;
+        action = &#34;&#34;
+        while self.game.curr_player == self.game.player_2:
+
+            if self.game.curr_points == 0:
+                action = &#34;roll&#34;
+            else:
+                action = self.game.comp_choice()
+
+            print(f&#34;{self.prompt} &#34;, flush=True, end=&#34;&#34;)
+            sleep(0.6)
+            print(action)
+
+            if action == &#34;roll&#34;:
+                self.do_roll(action)
+            elif action == &#34;hold&#34;:
+                self.do_hold(action)
+
+    def do_quit(self, _):
+        &#34;&#34;&#34;Terminate game.&#34;&#34;&#34;
+        print(&#34;Bye!&#34;)
+        self.game.quit()
+
+    def do_q(self, _):
+        &#34;&#34;&#34;Run do_quit().&#34;&#34;&#34;
+        self.do_quit(_)
+
+    def scores(self):
+        &#34;&#34;&#34;Return player scores.&#34;&#34;&#34;
+        return [self.game.player_1.points_held, self.game.player_2.points_held]
+
+    def do_choose(self, arg):
+        &#34;&#34;&#34;Choose difficulty level.&#34;&#34;&#34;
+        if not arg:
+            print(&#34;&gt;&gt; Missing argument!&#34;)
+        else:
+            if self.game.position == &#34;menu&#34;:
+                if arg == &#39;1&#39;:
+                    self.game.can_login = self.game.can_create = True
+                    msg1 = &#34;&gt;&gt; Enter &lt;login&gt; or &lt;create&gt; followed &#34;
+                    msg2 = &#34;by your username and password&#34;
+                    print(msg1 + msg2)
+                elif arg == &#39;2&#39;:
+                    self.game.set_computer()
+                    msg1 = &#34;\nBeep, beep, boops! &#34;
+                    msg2 = &#34;Computer gonna pwn some noobs!\n&#34;
+                    print(msg1 + msg2)
+                    self.game.position = &#34;computer_menu&#34;
+                    print(&#34;Please select a difficulty&#34;)
+                    print(&#34;__________________________&#34;)
+                    print(&#34;choose 1              Easy&#34;)
+                    print(&#34;choose 2            Normal&#34;)
+                    print(&#34;choose 3              Hard\n&#34;)
+                else:
+                    print(self.game.err_msg())
+            elif self.game.position == &#34;computer_menu&#34;:
+                if arg &gt;= &#39;1&#39; and arg &lt;= &#39;3&#39;:
+                    self.game.clear_screen()
+                    self.game.curr_player == self.game.player_1
+                    if arg == &#39;1&#39;:
+                        print(self.game.set_computer_difficulty(&#34;easy&#34;))
+                    elif arg == &#39;2&#39;:
+                        print(self.game.set_computer_difficulty(&#34;normal&#34;))
+                    elif arg == &#39;3&#39;:
+                        print(self.game.set_computer_difficulty(&#34;hard&#34;))
+                    print(&#34;\n&#34; + self.game.show_rules())
+                    self.game.start_reset_restart()
+                    print(self.game.scores())
+                    msg1 = &#34;You may type help to view a list of &#34;
+                    msg2 = &#34;all available commands&#34;
+                    print(msg1 + msg2 + &#34;\n&#34;)
+                else:
+                    print(self.game.err_msg())
+            else:
+                print(&#34;No choices are currently being presented\n&#34;)
+
+    def do_cheat(self, _):
+        &#34;&#34;&#34;Activate cheat.&#34;&#34;&#34;
+        if self.game.position == &#34;rules&#34; and self.game.player_2.username != &#34;&#34;:
+            pass
+        else:
+            print(self.game.err_msg())
+            return
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player != game.Game.player_1
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = self.game.curr_player != game.Game.player_2
+        if self.bool:
+            self.game.curr_player.is_cheating = True
+            print(&#34;Cheater! No bacon for you.&#34;)
+            print(&#34;&gt;&gt; setting Highscores has been disabled for this round &lt;&lt;&#34;)
+            print(&#34;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; You can no longer roll 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;)
+            print(&#34;\n&#34;)
+        else:
+            print(self.game.err_msg())
+
+    def do_restart(self, _):
+        &#34;&#34;&#34;Restart running game.&#34;&#34;&#34;
+        self.bool = (self.game.player_2.username != &#34;&#34;)
+        if self.bool:
+            self.game.start_reset_restart()
+            self.game.clear_screen()
+            print(&#34;&gt;&gt; Game restarted.&#34;.format())
+            print(&#34;\n&#34; + self.game.show_rules())
+            print(self.game.scores())
+        else:
+            print(self.game.err_msg())
+
+    def do_re(self, _):
+        &#34;&#34;&#34;Call do_restart to restart the game.&#34;&#34;&#34;
+        return self.do_restart(_)
+
+    def do_stats(self, arg):
+        &#34;&#34;&#34;Show player statistics.&#34;&#34;&#34;
+        if self.game.player_1.username == &#34;&#34;:
+            print(&#34;&gt;&gt;  No user is currently logged in.\n&#34;)
+            return
+        self.bool = False
+        player = None
+        p1n = self.game.player_1.username
+        p2n = self.game.player_2.username
+        arg = arg.split(&#34; &#34;)
+        arg = arg[0]
+
+        if len(arg) == 0 or arg.lower() == &#34;p1&#34; or arg.lower() == p1n.lower():
+            player = self.game.player_1
+        elif arg.lower() == &#34;p2&#34; or arg.lower() == p2n.lower():
+            if p2n.lower() != &#34;computer&#34;:
+                if p2n != &#34;&#34;:
+                    player = self.game.player_2
+                elif p2n == &#34; &#34;:
+                    player = self.game.player_1
+                else:
+                    print(f&#34;&gt;&gt;  {p2n} is not currently logged in!\n&#34;)
+                    return
+            else:
+                print(&#34;&gt;&gt;  Computer has no statistics!\n&#34;)
+                return
+        else:
+            m = &#39;Stats retrieval failed. &#39;
+            m2 = &#39;Please check if the user is logged in and try again.\n&#39;
+            print(m + m2)
+            return
+
+        if player is not None:
+            self.bool = True
+
+        if self.bool:
+            stats = player.show_statistics()
+            name = stats[0]
+            scores = stats[1]
+            wins = stats[2]
+            losses = stats[3]
+            q = &#34;___________________________________________&#34;
+            txt = f&#34;Player statistics for {name}&#34;
+            print(f&#34;{q}\n\n{txt.center(len(q))}\n{q}\n&#34;)
+
+            print(&#34;&gt; Player Top Scores:&#34;)
+            for i in range(0, len(scores)):
+                print(f&#34;\t{i + 1}.  {scores[i]} points&#34;)
+            print(f&#34;&gt; Player Wins: {wins}&#34;)
+            print(f&#34;&gt; Player Losses: {losses}&#34;)
+            print(&#34;\n\n&#34;)
+        else:
+            print(self.game.err_msg())
+
+    def do_leaderboards(self, _):
+        &#34;&#34;&#34;Print leaderboard.&#34;&#34;&#34;
+        q = &#34;___________________________________________&#34;
+        txt = &#34;Pig Global Leaderboards&#34;
+        print(f&#34;{q}\n\n{txt.center(len(q))}\n{q}\n&#34;)
+        for i in range(0, len(self.game.get_scoreboard())):
+            print(&#34;  {}{} &#34;.format(i + 1, &#39;.&#39;), end=&#34; &#34;)
+            obj = self.game.get_scoreboard()[i]
+            name = obj.username
+            score = obj.points_held
+            if name == &#34;&#34; or obj.points_held == 0:
+                name = &#34;Empty slot&#34;
+            print(&#34;{:15s}&#34;.format(name), end=&#34;&#34;)
+            print(end=&#34;|\t\t&#34; if name != &#34;Empty slot&#34; else &#34;\n&#34;)
+            if name != &#34;Empty slot&#34;:
+                print(f&#34;{score} points&#34;)
+        print()
+
+    def do_leaderboard(self, _):
+        &#34;&#34;&#34;Run do_leaderboards().&#34;&#34;&#34;
+        return self.do_leaderboards(_)
+
+    def do_lb(self, _):
+        &#34;&#34;&#34;Run do_leaderboards().&#34;&#34;&#34;
+        return self.do_leaderboards(_)
+
+    def do_rules(self, _):
+        &#34;&#34;&#34;Print rules.&#34;&#34;&#34;
+        position = self.game.position
+        print(self.game.show_rules())
+        self.game.position = position
+        return
+
+    def do_exit(self, _):
+        &#34;&#34;&#34;Terimnate game.&#34;&#34;&#34;
+        return self.do_quit(_)
+
+    def do_e(self, _):
+        &#34;&#34;&#34;Run do_exit().&#34;&#34;&#34;
+        return self.do_exit(_)
+
+    def do_clear(self, _):
+        &#34;&#34;&#34;Clear screen.&#34;&#34;&#34;
+        if self.game.player_1.username != &#34;&#34;:
+            self.game.clear_screen()
+            print(&#34;&gt;&gt;  Screen cleared!&#34;)
+            if self.game.position == &#34;menu&#34;:
+                print(self.game.show_menu())
+            elif self.game.position == &#34;rules&#34;:
+                print(self.game.show_rules())
+                print(self.game.scores())
+        else:
+            return print(self.game.err_msg())</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="development.shell.Shell"><code class="flex name class">
+<span>class <span class="ident">Shell</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Response to do_something in terminal window.</p>
+<p>Construct and initialise on instancing this class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Shell(cmd.Cmd):
+    &#34;&#34;&#34;Response to do_something in terminal window.&#34;&#34;&#34;
+
+    intro = &#39;Type help to see a list of commands\n&#39;
+    prompt = &#39;(game) &#39;
+    bool = False
+
+    def __init__(self):
+        &#34;&#34;&#34;Construct and initialise on instancing this class.&#34;&#34;&#34;
+        game.Game.set_filepath(game.Game, &#39;file1&#39;, &#39;data/users.pickle&#39;)
+        game.Game.set_filepath(game.Game, &#39;file2&#39;, &#39;data/leaderboards.pickle&#39;)
+        super().__init__()
+        try:
+            self.game = game.Game()
+        except FileNotFoundError:
+            game.Game.writer(game.Game)
+            self.game = game.Game()
+
+    def do_help(self, _):
+        &#34;&#34;&#34;Print help menu.&#34;&#34;&#34;
+        print(self.game.help()+&#34;\n&#34;)
+
+    def do_create(self, arg):
+        &#34;&#34;&#34;Create new instance of user.&#34;&#34;&#34;
+        name = self.game.curr_player.username
+        if self.game.can_create and (
+            self.game.position != &#34;rules&#34; or name == &#34;&#34;
+                ):
+            if len(arg.split(&#34; &#34;)) &gt;= 2:
+                try:
+                    arg = arg[0].upper() + arg[1:]
+                    if self.game.create_player(arg):
+                        msg = &#34;Player creation successful! Logging you in now!&#34;
+                        print(msg)
+                        self.game.writer()
+                        self.do_login(arg)
+                    else:
+                        msg1 = &#34;That username is not allowed! &#34;
+                        msg2 = &#34;Please pick another...&#34;
+                        print(msg1 + msg2 + &#34;\n&#34;)
+                except AlreadyExists as error:
+                    print(error.msg + &#34;\n&#34;)
+            else:
+                print(&#34;Arguments are missing. Please try again&#34;)
+        else:
+            print(&#34;Pig ate a lot of truffles and can&#39;t do that right now...&#34;)
+            print()
+
+    def do_login(self, arg):
+        &#34;&#34;&#34;Log into existing account.&#34;&#34;&#34;
+        arg = arg.split(&#34; &#34;)  # split additional parameters apart
+        name = self.game.curr_player.username
+        if len(arg) &gt;= 2:
+            pass
+        else:
+            print(&#34;Missing arguments!&#34;)
+            return
+
+        if self.game.can_create and (
+            self.game.position != &#34;rules&#34; or name == &#34;&#34;
+                ):
+            try:
+                if self.game.login(arg):
+                    arg = arg[0]  # discard of extra parameters
+                    arg = arg[0].upper() + arg[1:]  # uppercase 1st letter
+                    self.game.clear_screen()
+                    msg = &#34;\nLogin successful! Welcome {}&#34;
+                    n = self.game.curr_player.username
+                    print(msg.format(arg), end=&#34;. &#34; if n != &#34;&#34; else &#34;\n&#34;)
+                    if n != &#34;&#34;:
+                        print(f&#34;{arg} has been set as Player 2.\n\n&#34;)
+                        print(&#34;\n&#34; + self.game.show_rules())
+                        self.game.start_reset_restart()
+                        print(self.game.scores())
+                    else:
+                        self.game.curr_player = self.game.player_1
+                        p1n = self.game.curr_player.username
+                        self.prompt = f&#34;(game)({p1n}) &#34;
+                        self.game.can_create = False
+                        print(self.game.show_menu())
+            except UserNotFound as error:
+                print(error.msg)
+        else:
+            msg1 = &#34;Pig has deemed you unworthy of logging &#34;
+            msg2 = &#34;in to another account right now...\n&#34;
+            print(msg1+msg2)
+
+    def do_namechange(self, arg):
+        &#34;&#34;&#34;Change username of player.&#34;&#34;&#34;
+        if len(arg) &gt; 0:
+            pass
+        else:
+            print(&#34;Missing arguments!&#34;)
+        arg = arg[0].upper() + arg[1:]
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player.username != &#34;&#34;
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = (self.game.curr_player.username != &#34;&#34;)
+        if self.bool:
+            try:
+                new_name = self.game.namechange(arg)
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1.username = new_name
+                else:
+                    self.game.player_2.username = new_name
+                self.game.clear_screen()
+                print(&#34;\n&gt;&gt; Name updated.&#34;)
+                if self.game.position == &#34;menu&#34;:
+                    print(self.game.show_menu())
+                elif self.game.position == &#34;rules&#34;:
+                    print(self.game.show_rules())
+                    print(self.game.scores())
+                p1n = self.game.curr_player.username
+                self.prompt = f&#34;(game)({p1n}) &#34;
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1 == self.game.curr_player
+                else:
+                    self.game.player_2 == self.game.curr_player
+                self.game.writer()
+            except AlreadyExists as error:
+                print(error.msg)
+        else:
+            print(&#34;You can not change your name mid-game.&#34;, end=&#34; &#34;)
+            print(&#34;Consider resetting the game (/re or /reset)&#34;)
+
+    def do_roll(self, _):
+        &#34;&#34;&#34;Roll dice.&#34;&#34;&#34;
+        if self.game.position == &#39;menu&#39;:
+            return print(self.game.err_msg())
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player.username != &#34;&#34;
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = (self.game.curr_player.username != &#34;&#34;)
+        if self.bool:
+            rolled = self.game.roll()
+            name = self.game.curr_player.username
+            points = self.game.curr_points
+            print(f&#34;&gt;&gt; {name} rolled &#34;, flush=True, end=&#34;&#34;)
+            sleep(0.2)
+            for _ in range(0, 3):
+                print(&#34;. &#34;, flush=True, end=&#34;&#34;)
+                sleep(0.2)
+            if rolled != 1:
+                print(f&#34;{rolled}! {name}&#39;s current score is {points}\n&#34;)
+            else:
+                msg1 = f&#34;{rolled}! Oh no, {name}&#39;s non-held points and &#34;
+                msg2 = &#34;turn have been forfeited.\n&#34;
+                print(msg1+msg2)
+                self.game.reset_curr_points()
+                self.game.next_player()
+                name = self.game.curr_player.username
+                self.prompt = f&#34;(game)({name}) &#34;
+                if name == &#34;Computer&#34;:
+                    self.computer_logic()
+        else:
+            print(self.game.err_msg())
+
+    def do_r(self, _):
+        &#34;&#34;&#34;Run do_roll().&#34;&#34;&#34;
+        return self.do_roll(_)
+
+    def do_hold(self, arg):
+        &#34;&#34;&#34;Hold current points in round.&#34;&#34;&#34;
+        if self.game.position == &#39;menu&#39;:
+            return print(self.game.err_msg())
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player.username != &#34;&#34;
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = (self.game.curr_player.username != &#34;&#34;)
+        if self.bool:
+            sleep(0.2)
+            self.game.clear_screen()
+            print(&#34;\n\n\n&#34; + self.game.show_rules())
+            arg = arg.split(&#34; &#34;)
+            arg = arg[0]
+            name = self.game.curr_player.username
+            points = self.game.curr_points  # curr points
+            hpoints = self.game.curr_player.points_held  # curr held points
+            self.game.curr_player.points_held = hpoints + points  # updating
+            total = self.game.curr_player.points_held
+            if self.update_won(name, total):
+                return
+            else:
+                print(self.game.scores())
+                msg1 = f&#34;&gt;&gt; {name} saved {points} points this round! &#34;
+                msg2 = f&#34;{name} now has a total of {total} points held!\n&#34;
+                self.game.reset_curr_points()
+                self.game.next_player()
+                name = self.game.curr_player.username
+                self.prompt = f&#34;(game)({name}) &#34;
+                print(msg1 + msg2)
+            if name == &#34;Computer&#34;:
+                self.computer_logic()
+        else:
+            print(self.game.err_msg())
+
+    def do_h(self, _):
+        &#34;&#34;&#34;Run do_hold().&#34;&#34;&#34;
+        return self.do_hold(_)
+
+    def update_won(self, name, total):
+        &#34;&#34;&#34;Check if won.&#34;&#34;&#34;
+        if self.game.has_won():
+            self.game.clear_screen()
+
+            &#34;&#34;&#34;write data if curr player is player obj.&#34;&#34;&#34;
+            if isinstance(self.game.curr_player, game.Game.curr_player):
+                self.game.curr_player.add_win()
+                if name == self.game.player_2.username:
+                    &#34;&#34;&#34; player 1 is always player obj&#34;&#34;&#34;
+                    self.game.player_2 = self.game.curr_player
+                    self.game.player_1.add_losses()
+                else:
+                    self.game.player_1 = self.game.curr_player
+                    if self.game.player_2.username != &#34;Computer&#34;:
+                        self.game.player_2.add_losses()
+                for player in self.game.list_players:
+                    if player.username == name:
+                        player = self.game.curr_player
+                self.game.update()
+                # self.game.curr_player.reset()
+                self.game.writer()
+                self.game.reader()
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1 = self.game.curr_player
+                elif self.game.curr_player == self.game.player_2:
+                    self.game.player_2 == self.game.curr_player
+            else:
+                self.game.player_1.add_losses()
+
+            &#34;&#34;&#34;reset player 2.&#34;&#34;&#34;
+            p2_msg = f&#34;{self.game.player_2.username} has been logged out!&#34;
+            self.game.player_2 = game.Game.player_2
+
+            &#34;&#34;&#34;Print victory message and reset main menu.&#34;&#34;&#34;
+            victory_msg = &#34;&gt;&gt;  Congratulations, {}! You won with {} points!&#34;
+            print(f&#34;\n\n{victory_msg.format(name, total)}&#34;)
+            print(f&#34;&gt;&gt;  {p2_msg}\n\n&#34;)
+            print(self.game.show_menu())
+            return True
+        else:
+            return False
+
+    def computer_logic(self):
+        &#34;&#34;&#34;Logic powering computer/AI decisions(can&#39;t be called by cmdloop).&#34;&#34;&#34;
+        action = &#34;&#34;
+        while self.game.curr_player == self.game.player_2:
+
+            if self.game.curr_points == 0:
+                action = &#34;roll&#34;
+            else:
+                action = self.game.comp_choice()
+
+            print(f&#34;{self.prompt} &#34;, flush=True, end=&#34;&#34;)
+            sleep(0.6)
+            print(action)
+
+            if action == &#34;roll&#34;:
+                self.do_roll(action)
+            elif action == &#34;hold&#34;:
+                self.do_hold(action)
+
+    def do_quit(self, _):
+        &#34;&#34;&#34;Terminate game.&#34;&#34;&#34;
+        print(&#34;Bye!&#34;)
+        self.game.quit()
+
+    def do_q(self, _):
+        &#34;&#34;&#34;Run do_quit().&#34;&#34;&#34;
+        self.do_quit(_)
+
+    def scores(self):
+        &#34;&#34;&#34;Return player scores.&#34;&#34;&#34;
+        return [self.game.player_1.points_held, self.game.player_2.points_held]
+
+    def do_choose(self, arg):
+        &#34;&#34;&#34;Choose difficulty level.&#34;&#34;&#34;
+        if not arg:
+            print(&#34;&gt;&gt; Missing argument!&#34;)
+        else:
+            if self.game.position == &#34;menu&#34;:
+                if arg == &#39;1&#39;:
+                    self.game.can_login = self.game.can_create = True
+                    msg1 = &#34;&gt;&gt; Enter &lt;login&gt; or &lt;create&gt; followed &#34;
+                    msg2 = &#34;by your username and password&#34;
+                    print(msg1 + msg2)
+                elif arg == &#39;2&#39;:
+                    self.game.set_computer()
+                    msg1 = &#34;\nBeep, beep, boops! &#34;
+                    msg2 = &#34;Computer gonna pwn some noobs!\n&#34;
+                    print(msg1 + msg2)
+                    self.game.position = &#34;computer_menu&#34;
+                    print(&#34;Please select a difficulty&#34;)
+                    print(&#34;__________________________&#34;)
+                    print(&#34;choose 1              Easy&#34;)
+                    print(&#34;choose 2            Normal&#34;)
+                    print(&#34;choose 3              Hard\n&#34;)
+                else:
+                    print(self.game.err_msg())
+            elif self.game.position == &#34;computer_menu&#34;:
+                if arg &gt;= &#39;1&#39; and arg &lt;= &#39;3&#39;:
+                    self.game.clear_screen()
+                    self.game.curr_player == self.game.player_1
+                    if arg == &#39;1&#39;:
+                        print(self.game.set_computer_difficulty(&#34;easy&#34;))
+                    elif arg == &#39;2&#39;:
+                        print(self.game.set_computer_difficulty(&#34;normal&#34;))
+                    elif arg == &#39;3&#39;:
+                        print(self.game.set_computer_difficulty(&#34;hard&#34;))
+                    print(&#34;\n&#34; + self.game.show_rules())
+                    self.game.start_reset_restart()
+                    print(self.game.scores())
+                    msg1 = &#34;You may type help to view a list of &#34;
+                    msg2 = &#34;all available commands&#34;
+                    print(msg1 + msg2 + &#34;\n&#34;)
+                else:
+                    print(self.game.err_msg())
+            else:
+                print(&#34;No choices are currently being presented\n&#34;)
+
+    def do_cheat(self, _):
+        &#34;&#34;&#34;Activate cheat.&#34;&#34;&#34;
+        if self.game.position == &#34;rules&#34; and self.game.player_2.username != &#34;&#34;:
+            pass
+        else:
+            print(self.game.err_msg())
+            return
+
+        if self.game.curr_player == self.game.player_1:
+            self.bool = self.game.curr_player != game.Game.player_1
+        elif self.game.curr_player == self.game.player_2:
+            self.bool = self.game.curr_player != game.Game.player_2
+        if self.bool:
+            self.game.curr_player.is_cheating = True
+            print(&#34;Cheater! No bacon for you.&#34;)
+            print(&#34;&gt;&gt; setting Highscores has been disabled for this round &lt;&lt;&#34;)
+            print(&#34;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; You can no longer roll 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;)
+            print(&#34;\n&#34;)
+        else:
+            print(self.game.err_msg())
+
+    def do_restart(self, _):
+        &#34;&#34;&#34;Restart running game.&#34;&#34;&#34;
+        self.bool = (self.game.player_2.username != &#34;&#34;)
+        if self.bool:
+            self.game.start_reset_restart()
+            self.game.clear_screen()
+            print(&#34;&gt;&gt; Game restarted.&#34;.format())
+            print(&#34;\n&#34; + self.game.show_rules())
+            print(self.game.scores())
+        else:
+            print(self.game.err_msg())
+
+    def do_re(self, _):
+        &#34;&#34;&#34;Call do_restart to restart the game.&#34;&#34;&#34;
+        return self.do_restart(_)
+
+    def do_stats(self, arg):
+        &#34;&#34;&#34;Show player statistics.&#34;&#34;&#34;
+        if self.game.player_1.username == &#34;&#34;:
+            print(&#34;&gt;&gt;  No user is currently logged in.\n&#34;)
+            return
+        self.bool = False
+        player = None
+        p1n = self.game.player_1.username
+        p2n = self.game.player_2.username
+        arg = arg.split(&#34; &#34;)
+        arg = arg[0]
+
+        if len(arg) == 0 or arg.lower() == &#34;p1&#34; or arg.lower() == p1n.lower():
+            player = self.game.player_1
+        elif arg.lower() == &#34;p2&#34; or arg.lower() == p2n.lower():
+            if p2n.lower() != &#34;computer&#34;:
+                if p2n != &#34;&#34;:
+                    player = self.game.player_2
+                elif p2n == &#34; &#34;:
+                    player = self.game.player_1
+                else:
+                    print(f&#34;&gt;&gt;  {p2n} is not currently logged in!\n&#34;)
+                    return
+            else:
+                print(&#34;&gt;&gt;  Computer has no statistics!\n&#34;)
+                return
+        else:
+            m = &#39;Stats retrieval failed. &#39;
+            m2 = &#39;Please check if the user is logged in and try again.\n&#39;
+            print(m + m2)
+            return
+
+        if player is not None:
+            self.bool = True
+
+        if self.bool:
+            stats = player.show_statistics()
+            name = stats[0]
+            scores = stats[1]
+            wins = stats[2]
+            losses = stats[3]
+            q = &#34;___________________________________________&#34;
+            txt = f&#34;Player statistics for {name}&#34;
+            print(f&#34;{q}\n\n{txt.center(len(q))}\n{q}\n&#34;)
+
+            print(&#34;&gt; Player Top Scores:&#34;)
+            for i in range(0, len(scores)):
+                print(f&#34;\t{i + 1}.  {scores[i]} points&#34;)
+            print(f&#34;&gt; Player Wins: {wins}&#34;)
+            print(f&#34;&gt; Player Losses: {losses}&#34;)
+            print(&#34;\n\n&#34;)
+        else:
+            print(self.game.err_msg())
+
+    def do_leaderboards(self, _):
+        &#34;&#34;&#34;Print leaderboard.&#34;&#34;&#34;
+        q = &#34;___________________________________________&#34;
+        txt = &#34;Pig Global Leaderboards&#34;
+        print(f&#34;{q}\n\n{txt.center(len(q))}\n{q}\n&#34;)
+        for i in range(0, len(self.game.get_scoreboard())):
+            print(&#34;  {}{} &#34;.format(i + 1, &#39;.&#39;), end=&#34; &#34;)
+            obj = self.game.get_scoreboard()[i]
+            name = obj.username
+            score = obj.points_held
+            if name == &#34;&#34; or obj.points_held == 0:
+                name = &#34;Empty slot&#34;
+            print(&#34;{:15s}&#34;.format(name), end=&#34;&#34;)
+            print(end=&#34;|\t\t&#34; if name != &#34;Empty slot&#34; else &#34;\n&#34;)
+            if name != &#34;Empty slot&#34;:
+                print(f&#34;{score} points&#34;)
+        print()
+
+    def do_leaderboard(self, _):
+        &#34;&#34;&#34;Run do_leaderboards().&#34;&#34;&#34;
+        return self.do_leaderboards(_)
+
+    def do_lb(self, _):
+        &#34;&#34;&#34;Run do_leaderboards().&#34;&#34;&#34;
+        return self.do_leaderboards(_)
+
+    def do_rules(self, _):
+        &#34;&#34;&#34;Print rules.&#34;&#34;&#34;
+        position = self.game.position
+        print(self.game.show_rules())
+        self.game.position = position
+        return
+
+    def do_exit(self, _):
+        &#34;&#34;&#34;Terimnate game.&#34;&#34;&#34;
+        return self.do_quit(_)
+
+    def do_e(self, _):
+        &#34;&#34;&#34;Run do_exit().&#34;&#34;&#34;
+        return self.do_exit(_)
+
+    def do_clear(self, _):
+        &#34;&#34;&#34;Clear screen.&#34;&#34;&#34;
+        if self.game.player_1.username != &#34;&#34;:
+            self.game.clear_screen()
+            print(&#34;&gt;&gt;  Screen cleared!&#34;)
+            if self.game.position == &#34;menu&#34;:
+                print(self.game.show_menu())
+            elif self.game.position == &#34;rules&#34;:
+                print(self.game.show_rules())
+                print(self.game.scores())
+        else:
+            return print(self.game.err_msg())</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>cmd.Cmd</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="development.shell.Shell.bool"><code class="name">var <span class="ident">bool</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.shell.Shell.intro"><code class="name">var <span class="ident">intro</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.shell.Shell.prompt"><code class="name">var <span class="ident">prompt</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="development.shell.Shell.computer_logic"><code class="name flex">
+<span>def <span class="ident">computer_logic</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Logic powering computer/AI decisions(can't be called by cmdloop).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def computer_logic(self):
+    &#34;&#34;&#34;Logic powering computer/AI decisions(can&#39;t be called by cmdloop).&#34;&#34;&#34;
+    action = &#34;&#34;
+    while self.game.curr_player == self.game.player_2:
+
+        if self.game.curr_points == 0:
+            action = &#34;roll&#34;
+        else:
+            action = self.game.comp_choice()
+
+        print(f&#34;{self.prompt} &#34;, flush=True, end=&#34;&#34;)
+        sleep(0.6)
+        print(action)
+
+        if action == &#34;roll&#34;:
+            self.do_roll(action)
+        elif action == &#34;hold&#34;:
+            self.do_hold(action)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_cheat"><code class="name flex">
+<span>def <span class="ident">do_cheat</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Activate cheat.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_cheat(self, _):
+    &#34;&#34;&#34;Activate cheat.&#34;&#34;&#34;
+    if self.game.position == &#34;rules&#34; and self.game.player_2.username != &#34;&#34;:
+        pass
+    else:
+        print(self.game.err_msg())
+        return
+
+    if self.game.curr_player == self.game.player_1:
+        self.bool = self.game.curr_player != game.Game.player_1
+    elif self.game.curr_player == self.game.player_2:
+        self.bool = self.game.curr_player != game.Game.player_2
+    if self.bool:
+        self.game.curr_player.is_cheating = True
+        print(&#34;Cheater! No bacon for you.&#34;)
+        print(&#34;&gt;&gt; setting Highscores has been disabled for this round &lt;&lt;&#34;)
+        print(&#34;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; You can no longer roll 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;)
+        print(&#34;\n&#34;)
+    else:
+        print(self.game.err_msg())</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_choose"><code class="name flex">
+<span>def <span class="ident">do_choose</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Choose difficulty level.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_choose(self, arg):
+    &#34;&#34;&#34;Choose difficulty level.&#34;&#34;&#34;
+    if not arg:
+        print(&#34;&gt;&gt; Missing argument!&#34;)
+    else:
+        if self.game.position == &#34;menu&#34;:
+            if arg == &#39;1&#39;:
+                self.game.can_login = self.game.can_create = True
+                msg1 = &#34;&gt;&gt; Enter &lt;login&gt; or &lt;create&gt; followed &#34;
+                msg2 = &#34;by your username and password&#34;
+                print(msg1 + msg2)
+            elif arg == &#39;2&#39;:
+                self.game.set_computer()
+                msg1 = &#34;\nBeep, beep, boops! &#34;
+                msg2 = &#34;Computer gonna pwn some noobs!\n&#34;
+                print(msg1 + msg2)
+                self.game.position = &#34;computer_menu&#34;
+                print(&#34;Please select a difficulty&#34;)
+                print(&#34;__________________________&#34;)
+                print(&#34;choose 1              Easy&#34;)
+                print(&#34;choose 2            Normal&#34;)
+                print(&#34;choose 3              Hard\n&#34;)
+            else:
+                print(self.game.err_msg())
+        elif self.game.position == &#34;computer_menu&#34;:
+            if arg &gt;= &#39;1&#39; and arg &lt;= &#39;3&#39;:
+                self.game.clear_screen()
+                self.game.curr_player == self.game.player_1
+                if arg == &#39;1&#39;:
+                    print(self.game.set_computer_difficulty(&#34;easy&#34;))
+                elif arg == &#39;2&#39;:
+                    print(self.game.set_computer_difficulty(&#34;normal&#34;))
+                elif arg == &#39;3&#39;:
+                    print(self.game.set_computer_difficulty(&#34;hard&#34;))
+                print(&#34;\n&#34; + self.game.show_rules())
+                self.game.start_reset_restart()
+                print(self.game.scores())
+                msg1 = &#34;You may type help to view a list of &#34;
+                msg2 = &#34;all available commands&#34;
+                print(msg1 + msg2 + &#34;\n&#34;)
+            else:
+                print(self.game.err_msg())
+        else:
+            print(&#34;No choices are currently being presented\n&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_clear"><code class="name flex">
+<span>def <span class="ident">do_clear</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Clear screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_clear(self, _):
+    &#34;&#34;&#34;Clear screen.&#34;&#34;&#34;
+    if self.game.player_1.username != &#34;&#34;:
+        self.game.clear_screen()
+        print(&#34;&gt;&gt;  Screen cleared!&#34;)
+        if self.game.position == &#34;menu&#34;:
+            print(self.game.show_menu())
+        elif self.game.position == &#34;rules&#34;:
+            print(self.game.show_rules())
+            print(self.game.scores())
+    else:
+        return print(self.game.err_msg())</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_create"><code class="name flex">
+<span>def <span class="ident">do_create</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create new instance of user.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_create(self, arg):
+    &#34;&#34;&#34;Create new instance of user.&#34;&#34;&#34;
+    name = self.game.curr_player.username
+    if self.game.can_create and (
+        self.game.position != &#34;rules&#34; or name == &#34;&#34;
+            ):
+        if len(arg.split(&#34; &#34;)) &gt;= 2:
+            try:
+                arg = arg[0].upper() + arg[1:]
+                if self.game.create_player(arg):
+                    msg = &#34;Player creation successful! Logging you in now!&#34;
+                    print(msg)
+                    self.game.writer()
+                    self.do_login(arg)
+                else:
+                    msg1 = &#34;That username is not allowed! &#34;
+                    msg2 = &#34;Please pick another...&#34;
+                    print(msg1 + msg2 + &#34;\n&#34;)
+            except AlreadyExists as error:
+                print(error.msg + &#34;\n&#34;)
+        else:
+            print(&#34;Arguments are missing. Please try again&#34;)
+    else:
+        print(&#34;Pig ate a lot of truffles and can&#39;t do that right now...&#34;)
+        print()</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_e"><code class="name flex">
+<span>def <span class="ident">do_e</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run do_exit().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_e(self, _):
+    &#34;&#34;&#34;Run do_exit().&#34;&#34;&#34;
+    return self.do_exit(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_exit"><code class="name flex">
+<span>def <span class="ident">do_exit</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Terimnate game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_exit(self, _):
+    &#34;&#34;&#34;Terimnate game.&#34;&#34;&#34;
+    return self.do_quit(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_h"><code class="name flex">
+<span>def <span class="ident">do_h</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run do_hold().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_h(self, _):
+    &#34;&#34;&#34;Run do_hold().&#34;&#34;&#34;
+    return self.do_hold(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_help"><code class="name flex">
+<span>def <span class="ident">do_help</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print help menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_help(self, _):
+    &#34;&#34;&#34;Print help menu.&#34;&#34;&#34;
+    print(self.game.help()+&#34;\n&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_hold"><code class="name flex">
+<span>def <span class="ident">do_hold</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Hold current points in round.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_hold(self, arg):
+    &#34;&#34;&#34;Hold current points in round.&#34;&#34;&#34;
+    if self.game.position == &#39;menu&#39;:
+        return print(self.game.err_msg())
+
+    if self.game.curr_player == self.game.player_1:
+        self.bool = self.game.curr_player.username != &#34;&#34;
+    elif self.game.curr_player == self.game.player_2:
+        self.bool = (self.game.curr_player.username != &#34;&#34;)
+    if self.bool:
+        sleep(0.2)
+        self.game.clear_screen()
+        print(&#34;\n\n\n&#34; + self.game.show_rules())
+        arg = arg.split(&#34; &#34;)
+        arg = arg[0]
+        name = self.game.curr_player.username
+        points = self.game.curr_points  # curr points
+        hpoints = self.game.curr_player.points_held  # curr held points
+        self.game.curr_player.points_held = hpoints + points  # updating
+        total = self.game.curr_player.points_held
+        if self.update_won(name, total):
+            return
+        else:
+            print(self.game.scores())
+            msg1 = f&#34;&gt;&gt; {name} saved {points} points this round! &#34;
+            msg2 = f&#34;{name} now has a total of {total} points held!\n&#34;
+            self.game.reset_curr_points()
+            self.game.next_player()
+            name = self.game.curr_player.username
+            self.prompt = f&#34;(game)({name}) &#34;
+            print(msg1 + msg2)
+        if name == &#34;Computer&#34;:
+            self.computer_logic()
+    else:
+        print(self.game.err_msg())</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_lb"><code class="name flex">
+<span>def <span class="ident">do_lb</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run do_leaderboards().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_lb(self, _):
+    &#34;&#34;&#34;Run do_leaderboards().&#34;&#34;&#34;
+    return self.do_leaderboards(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_leaderboard"><code class="name flex">
+<span>def <span class="ident">do_leaderboard</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run do_leaderboards().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_leaderboard(self, _):
+    &#34;&#34;&#34;Run do_leaderboards().&#34;&#34;&#34;
+    return self.do_leaderboards(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_leaderboards"><code class="name flex">
+<span>def <span class="ident">do_leaderboards</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print leaderboard.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_leaderboards(self, _):
+    &#34;&#34;&#34;Print leaderboard.&#34;&#34;&#34;
+    q = &#34;___________________________________________&#34;
+    txt = &#34;Pig Global Leaderboards&#34;
+    print(f&#34;{q}\n\n{txt.center(len(q))}\n{q}\n&#34;)
+    for i in range(0, len(self.game.get_scoreboard())):
+        print(&#34;  {}{} &#34;.format(i + 1, &#39;.&#39;), end=&#34; &#34;)
+        obj = self.game.get_scoreboard()[i]
+        name = obj.username
+        score = obj.points_held
+        if name == &#34;&#34; or obj.points_held == 0:
+            name = &#34;Empty slot&#34;
+        print(&#34;{:15s}&#34;.format(name), end=&#34;&#34;)
+        print(end=&#34;|\t\t&#34; if name != &#34;Empty slot&#34; else &#34;\n&#34;)
+        if name != &#34;Empty slot&#34;:
+            print(f&#34;{score} points&#34;)
+    print()</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_login"><code class="name flex">
+<span>def <span class="ident">do_login</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Log into existing account.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_login(self, arg):
+    &#34;&#34;&#34;Log into existing account.&#34;&#34;&#34;
+    arg = arg.split(&#34; &#34;)  # split additional parameters apart
+    name = self.game.curr_player.username
+    if len(arg) &gt;= 2:
+        pass
+    else:
+        print(&#34;Missing arguments!&#34;)
+        return
+
+    if self.game.can_create and (
+        self.game.position != &#34;rules&#34; or name == &#34;&#34;
+            ):
+        try:
+            if self.game.login(arg):
+                arg = arg[0]  # discard of extra parameters
+                arg = arg[0].upper() + arg[1:]  # uppercase 1st letter
+                self.game.clear_screen()
+                msg = &#34;\nLogin successful! Welcome {}&#34;
+                n = self.game.curr_player.username
+                print(msg.format(arg), end=&#34;. &#34; if n != &#34;&#34; else &#34;\n&#34;)
+                if n != &#34;&#34;:
+                    print(f&#34;{arg} has been set as Player 2.\n\n&#34;)
+                    print(&#34;\n&#34; + self.game.show_rules())
+                    self.game.start_reset_restart()
+                    print(self.game.scores())
+                else:
+                    self.game.curr_player = self.game.player_1
+                    p1n = self.game.curr_player.username
+                    self.prompt = f&#34;(game)({p1n}) &#34;
+                    self.game.can_create = False
+                    print(self.game.show_menu())
+        except UserNotFound as error:
+            print(error.msg)
+    else:
+        msg1 = &#34;Pig has deemed you unworthy of logging &#34;
+        msg2 = &#34;in to another account right now...\n&#34;
+        print(msg1+msg2)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_namechange"><code class="name flex">
+<span>def <span class="ident">do_namechange</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Change username of player.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_namechange(self, arg):
+    &#34;&#34;&#34;Change username of player.&#34;&#34;&#34;
+    if len(arg) &gt; 0:
+        pass
+    else:
+        print(&#34;Missing arguments!&#34;)
+    arg = arg[0].upper() + arg[1:]
+    if self.game.curr_player == self.game.player_1:
+        self.bool = self.game.curr_player.username != &#34;&#34;
+    elif self.game.curr_player == self.game.player_2:
+        self.bool = (self.game.curr_player.username != &#34;&#34;)
+    if self.bool:
+        try:
+            new_name = self.game.namechange(arg)
+            if self.game.curr_player == self.game.player_1:
+                self.game.player_1.username = new_name
+            else:
+                self.game.player_2.username = new_name
+            self.game.clear_screen()
+            print(&#34;\n&gt;&gt; Name updated.&#34;)
+            if self.game.position == &#34;menu&#34;:
+                print(self.game.show_menu())
+            elif self.game.position == &#34;rules&#34;:
+                print(self.game.show_rules())
+                print(self.game.scores())
+            p1n = self.game.curr_player.username
+            self.prompt = f&#34;(game)({p1n}) &#34;
+            if self.game.curr_player == self.game.player_1:
+                self.game.player_1 == self.game.curr_player
+            else:
+                self.game.player_2 == self.game.curr_player
+            self.game.writer()
+        except AlreadyExists as error:
+            print(error.msg)
+    else:
+        print(&#34;You can not change your name mid-game.&#34;, end=&#34; &#34;)
+        print(&#34;Consider resetting the game (/re or /reset)&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_q"><code class="name flex">
+<span>def <span class="ident">do_q</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run do_quit().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_q(self, _):
+    &#34;&#34;&#34;Run do_quit().&#34;&#34;&#34;
+    self.do_quit(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_quit"><code class="name flex">
+<span>def <span class="ident">do_quit</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Terminate game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_quit(self, _):
+    &#34;&#34;&#34;Terminate game.&#34;&#34;&#34;
+    print(&#34;Bye!&#34;)
+    self.game.quit()</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_r"><code class="name flex">
+<span>def <span class="ident">do_r</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run do_roll().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_r(self, _):
+    &#34;&#34;&#34;Run do_roll().&#34;&#34;&#34;
+    return self.do_roll(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_re"><code class="name flex">
+<span>def <span class="ident">do_re</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Call do_restart to restart the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_re(self, _):
+    &#34;&#34;&#34;Call do_restart to restart the game.&#34;&#34;&#34;
+    return self.do_restart(_)</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_restart"><code class="name flex">
+<span>def <span class="ident">do_restart</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Restart running game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_restart(self, _):
+    &#34;&#34;&#34;Restart running game.&#34;&#34;&#34;
+    self.bool = (self.game.player_2.username != &#34;&#34;)
+    if self.bool:
+        self.game.start_reset_restart()
+        self.game.clear_screen()
+        print(&#34;&gt;&gt; Game restarted.&#34;.format())
+        print(&#34;\n&#34; + self.game.show_rules())
+        print(self.game.scores())
+    else:
+        print(self.game.err_msg())</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_roll"><code class="name flex">
+<span>def <span class="ident">do_roll</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Roll dice.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_roll(self, _):
+    &#34;&#34;&#34;Roll dice.&#34;&#34;&#34;
+    if self.game.position == &#39;menu&#39;:
+        return print(self.game.err_msg())
+
+    if self.game.curr_player == self.game.player_1:
+        self.bool = self.game.curr_player.username != &#34;&#34;
+    elif self.game.curr_player == self.game.player_2:
+        self.bool = (self.game.curr_player.username != &#34;&#34;)
+    if self.bool:
+        rolled = self.game.roll()
+        name = self.game.curr_player.username
+        points = self.game.curr_points
+        print(f&#34;&gt;&gt; {name} rolled &#34;, flush=True, end=&#34;&#34;)
+        sleep(0.2)
+        for _ in range(0, 3):
+            print(&#34;. &#34;, flush=True, end=&#34;&#34;)
+            sleep(0.2)
+        if rolled != 1:
+            print(f&#34;{rolled}! {name}&#39;s current score is {points}\n&#34;)
+        else:
+            msg1 = f&#34;{rolled}! Oh no, {name}&#39;s non-held points and &#34;
+            msg2 = &#34;turn have been forfeited.\n&#34;
+            print(msg1+msg2)
+            self.game.reset_curr_points()
+            self.game.next_player()
+            name = self.game.curr_player.username
+            self.prompt = f&#34;(game)({name}) &#34;
+            if name == &#34;Computer&#34;:
+                self.computer_logic()
+    else:
+        print(self.game.err_msg())</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_rules"><code class="name flex">
+<span>def <span class="ident">do_rules</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print rules.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_rules(self, _):
+    &#34;&#34;&#34;Print rules.&#34;&#34;&#34;
+    position = self.game.position
+    print(self.game.show_rules())
+    self.game.position = position
+    return</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.do_stats"><code class="name flex">
+<span>def <span class="ident">do_stats</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show player statistics.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_stats(self, arg):
+    &#34;&#34;&#34;Show player statistics.&#34;&#34;&#34;
+    if self.game.player_1.username == &#34;&#34;:
+        print(&#34;&gt;&gt;  No user is currently logged in.\n&#34;)
+        return
+    self.bool = False
+    player = None
+    p1n = self.game.player_1.username
+    p2n = self.game.player_2.username
+    arg = arg.split(&#34; &#34;)
+    arg = arg[0]
+
+    if len(arg) == 0 or arg.lower() == &#34;p1&#34; or arg.lower() == p1n.lower():
+        player = self.game.player_1
+    elif arg.lower() == &#34;p2&#34; or arg.lower() == p2n.lower():
+        if p2n.lower() != &#34;computer&#34;:
+            if p2n != &#34;&#34;:
+                player = self.game.player_2
+            elif p2n == &#34; &#34;:
+                player = self.game.player_1
+            else:
+                print(f&#34;&gt;&gt;  {p2n} is not currently logged in!\n&#34;)
+                return
+        else:
+            print(&#34;&gt;&gt;  Computer has no statistics!\n&#34;)
+            return
+    else:
+        m = &#39;Stats retrieval failed. &#39;
+        m2 = &#39;Please check if the user is logged in and try again.\n&#39;
+        print(m + m2)
+        return
+
+    if player is not None:
+        self.bool = True
+
+    if self.bool:
+        stats = player.show_statistics()
+        name = stats[0]
+        scores = stats[1]
+        wins = stats[2]
+        losses = stats[3]
+        q = &#34;___________________________________________&#34;
+        txt = f&#34;Player statistics for {name}&#34;
+        print(f&#34;{q}\n\n{txt.center(len(q))}\n{q}\n&#34;)
+
+        print(&#34;&gt; Player Top Scores:&#34;)
+        for i in range(0, len(scores)):
+            print(f&#34;\t{i + 1}.  {scores[i]} points&#34;)
+        print(f&#34;&gt; Player Wins: {wins}&#34;)
+        print(f&#34;&gt; Player Losses: {losses}&#34;)
+        print(&#34;\n\n&#34;)
+    else:
+        print(self.game.err_msg())</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.scores"><code class="name flex">
+<span>def <span class="ident">scores</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return player scores.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def scores(self):
+    &#34;&#34;&#34;Return player scores.&#34;&#34;&#34;
+    return [self.game.player_1.points_held, self.game.player_2.points_held]</code></pre>
+</details>
+</dd>
+<dt id="development.shell.Shell.update_won"><code class="name flex">
+<span>def <span class="ident">update_won</span></span>(<span>self, name, total)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if won.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_won(self, name, total):
+    &#34;&#34;&#34;Check if won.&#34;&#34;&#34;
+    if self.game.has_won():
+        self.game.clear_screen()
+
+        &#34;&#34;&#34;write data if curr player is player obj.&#34;&#34;&#34;
+        if isinstance(self.game.curr_player, game.Game.curr_player):
+            self.game.curr_player.add_win()
+            if name == self.game.player_2.username:
+                &#34;&#34;&#34; player 1 is always player obj&#34;&#34;&#34;
+                self.game.player_2 = self.game.curr_player
+                self.game.player_1.add_losses()
+            else:
+                self.game.player_1 = self.game.curr_player
+                if self.game.player_2.username != &#34;Computer&#34;:
+                    self.game.player_2.add_losses()
+            for player in self.game.list_players:
+                if player.username == name:
+                    player = self.game.curr_player
+            self.game.update()
+            # self.game.curr_player.reset()
+            self.game.writer()
+            self.game.reader()
+            if self.game.curr_player == self.game.player_1:
+                self.game.player_1 = self.game.curr_player
+            elif self.game.curr_player == self.game.player_2:
+                self.game.player_2 == self.game.curr_player
+        else:
+            self.game.player_1.add_losses()
+
+        &#34;&#34;&#34;reset player 2.&#34;&#34;&#34;
+        p2_msg = f&#34;{self.game.player_2.username} has been logged out!&#34;
+        self.game.player_2 = game.Game.player_2
+
+        &#34;&#34;&#34;Print victory message and reset main menu.&#34;&#34;&#34;
+        victory_msg = &#34;&gt;&gt;  Congratulations, {}! You won with {} points!&#34;
+        print(f&#34;\n\n{victory_msg.format(name, total)}&#34;)
+        print(f&#34;&gt;&gt;  {p2_msg}\n\n&#34;)
+        print(self.game.show_menu())
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="development" href="index.html">development</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="development.shell.Shell" href="#development.shell.Shell">Shell</a></code></h4>
+<ul class="two-column">
+<li><code><a title="development.shell.Shell.bool" href="#development.shell.Shell.bool">bool</a></code></li>
+<li><code><a title="development.shell.Shell.computer_logic" href="#development.shell.Shell.computer_logic">computer_logic</a></code></li>
+<li><code><a title="development.shell.Shell.do_cheat" href="#development.shell.Shell.do_cheat">do_cheat</a></code></li>
+<li><code><a title="development.shell.Shell.do_choose" href="#development.shell.Shell.do_choose">do_choose</a></code></li>
+<li><code><a title="development.shell.Shell.do_clear" href="#development.shell.Shell.do_clear">do_clear</a></code></li>
+<li><code><a title="development.shell.Shell.do_create" href="#development.shell.Shell.do_create">do_create</a></code></li>
+<li><code><a title="development.shell.Shell.do_e" href="#development.shell.Shell.do_e">do_e</a></code></li>
+<li><code><a title="development.shell.Shell.do_exit" href="#development.shell.Shell.do_exit">do_exit</a></code></li>
+<li><code><a title="development.shell.Shell.do_h" href="#development.shell.Shell.do_h">do_h</a></code></li>
+<li><code><a title="development.shell.Shell.do_help" href="#development.shell.Shell.do_help">do_help</a></code></li>
+<li><code><a title="development.shell.Shell.do_hold" href="#development.shell.Shell.do_hold">do_hold</a></code></li>
+<li><code><a title="development.shell.Shell.do_lb" href="#development.shell.Shell.do_lb">do_lb</a></code></li>
+<li><code><a title="development.shell.Shell.do_leaderboard" href="#development.shell.Shell.do_leaderboard">do_leaderboard</a></code></li>
+<li><code><a title="development.shell.Shell.do_leaderboards" href="#development.shell.Shell.do_leaderboards">do_leaderboards</a></code></li>
+<li><code><a title="development.shell.Shell.do_login" href="#development.shell.Shell.do_login">do_login</a></code></li>
+<li><code><a title="development.shell.Shell.do_namechange" href="#development.shell.Shell.do_namechange">do_namechange</a></code></li>
+<li><code><a title="development.shell.Shell.do_q" href="#development.shell.Shell.do_q">do_q</a></code></li>
+<li><code><a title="development.shell.Shell.do_quit" href="#development.shell.Shell.do_quit">do_quit</a></code></li>
+<li><code><a title="development.shell.Shell.do_r" href="#development.shell.Shell.do_r">do_r</a></code></li>
+<li><code><a title="development.shell.Shell.do_re" href="#development.shell.Shell.do_re">do_re</a></code></li>
+<li><code><a title="development.shell.Shell.do_restart" href="#development.shell.Shell.do_restart">do_restart</a></code></li>
+<li><code><a title="development.shell.Shell.do_roll" href="#development.shell.Shell.do_roll">do_roll</a></code></li>
+<li><code><a title="development.shell.Shell.do_rules" href="#development.shell.Shell.do_rules">do_rules</a></code></li>
+<li><code><a title="development.shell.Shell.do_stats" href="#development.shell.Shell.do_stats">do_stats</a></code></li>
+<li><code><a title="development.shell.Shell.intro" href="#development.shell.Shell.intro">intro</a></code></li>
+<li><code><a title="development.shell.Shell.prompt" href="#development.shell.Shell.prompt">prompt</a></code></li>
+<li><code><a title="development.shell.Shell.scores" href="#development.shell.Shell.scores">scores</a></code></li>
+<li><code><a title="development.shell.Shell.update_won" href="#development.shell.Shell.update_won">update_won</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

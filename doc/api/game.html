@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>development.game API documentation</title>
+<meta name="description" content="Main game logic." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>development.game</code></h1>
+</header>
+<section id="section-intro">
+<p>Main game logic.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Main game logic.&#34;&#34;&#34;
+
+from error_handling.already_exists import AlreadyExists
+from error_handling.user_not_found import UserNotFound
+import random
+import player
+import computer
+import leaderboards
+import subprocess
+import synchronization
+import platform
+
+
+class Game():
+    &#34;&#34;&#34;Game class.&#34;&#34;&#34;
+
+    position = &#34;menu&#34;  # where you&#39;re currently navigating within the game
+    list_players = []
+    player_1 = player.Player
+    player_2 = player.Player
+    curr_player = player.Player
+    curr_points = 0
+    can_login = can_create = True
+    error_msg_flavor = (
+        &#34;No lo comprendo&#34;,
+        &#34;No ho entenc&#34;,
+        &#34;Oh mon Dieu&#34;,
+        &#34;Dios mio&#34;,
+        &#34;Je ne le comprends pas&#34;,
+        &#34;Non lo capisco&#34;,
+        &#34;Jag förstår det inte&#34;,
+        &#34;Jeg forstår ikke&#34;,
+        &#34;Oh mio Dio&#34;,
+        &#34;Meu Deus&#34;,
+        &#34;Não compreendo&#34;,
+        &#34;Não percebo&#34;
+    )
+    error_msg = &#34;&gt;&gt; {}! That can&#39;t be done right now.&#34;
+
+    def __init__(self):
+        &#34;&#34;&#34;Contructor.&#34;&#34;&#34;
+        try:
+            synchronization.Sync().pickle_read()
+        except FileNotFoundError:
+            synchronization.Sync().pickle_write()
+
+    def help(self):
+        &#34;&#34;&#34;Help Menu.&#34;&#34;&#34;
+        msg = &#34;&#34;&#34;
+            \t_______________________________________________________________
+
+            \t        Welcome to our help menu! Here are your options
+            \t_______________________________________________________________
+
+            \t-------------
+            \t  GAMEPLAY
+            \t-------------
+            \tr / roll         Roll the dice
+            \th / hold         Hold your score (ends your turn)
+            \tre / restart     Restart the game and discard your score
+            \tcheat            Enter cheat mode. *Using this will disqualify
+            \t                 you from earning any highscores this round
+
+            \t-------------
+            \t    USER
+            \t-------------
+            \tcreate           Create a new player
+            \tlogin            Log in as an existing player
+            \tstats            Show current player statistics
+            \tstats &lt;name&gt;     Show the statistics of player 1 or player 2
+            \tlb/leaderboard   Show global leaderboards
+            \tnamechange       change your username (does not change previous
+            \t                 Scoreboard scores)
+
+            \t-------------
+            \t  GENERAL
+            \t-------------
+            \tclear            clears the screen
+            \trules            print out the rules for the game
+            \thelp             Brings up (this) help menu
+            \tq / quit         Quits the game
+            \te / exit         Quits the game
+            &#34;&#34;&#34;
+        return msg
+
+    def show_menu(self):
+        &#34;&#34;&#34;Show game menu.&#34;&#34;&#34;
+        self.position = &#34;menu&#34;
+        oink = &#34;&#34;&#34;
+
+                              __ _________________
+                            /  /  V               \\9-
+                           /0 / 0                  |
+                          |o:o|                    |
+                            \\       _________     /
+                             \\ \\   |        | |   |
+                              \\_\\__|        |_|__/
+        ________________________________________________________________
+
+             &gt;&gt;&gt;&gt;&gt;&gt;   What game mode would you like to play?   &lt;&lt;&lt;&lt;&lt;&lt;
+        ________________________________________________________________
+
+            choose 1                Player vs. Player
+            choose 2                Player vs. Computer
+            quit                    Quit the game\n\n\n&#34;&#34;&#34;
+        return oink
+
+    def create_player(self, info):
+        &#34;&#34;&#34;Create instance of player class.&#34;&#34;&#34;
+        if isinstance(info, str):
+            info = info.split(&#34; &#34;)
+        username = info[0]
+        password = info[1]
+        &#34;&#34;&#34; creates a new player &#34;&#34;&#34;
+
+        names_not_allowed = (
+            &#34;computer&#34;,
+            &#34;pig&#34;,
+            &#34;test&#34;,
+            &#34;user&#34;,
+            &#34;tester&#34;,
+            &#34;random&#34;,
+            &#34;example&#34;
+            )
+
+        if username.lower() not in names_not_allowed:
+            new_player = player.Player(username, password)
+            if len(self.list_players) &gt; 0:
+                for p in self.list_players:
+                    if new_player.username == p.username:
+                        raise AlreadyExists
+            self.list_players.append(new_player)
+            return True
+        else:
+            return False
+
+    def show_rules(self):
+        &#34;&#34;&#34;Show menu of rules.&#34;&#34;&#34;
+        self.position = &#34;rules&#34;
+        msg = &#34;&#34;&#34;
+
+              RULES |
+                1   |   You may roll until you hold your score or roll 1
+                2   |   Holding saves your accumulated points to your total
+                3   |   Rolling 1 loses you all your unheld points
+                4   |   The first player to hold a score of 100 points wins.
+
+        &#34;&#34;&#34;
+        return msg
+
+    def login(self, info):
+        &#34;&#34;&#34;Log in the user and sets the match as player.&#34;&#34;&#34;
+        username = info[0]
+        username = username[0].upper() + username[1:]
+        password = info[1]
+
+        for p in self.list_players:
+            if username == p.username and password == p.password:
+                if self.player_1.username != &#34;&#34;:
+                    self.player_2 = p
+                else:
+                    self.player_1 = p
+                self.can_login = False
+                return True
+        raise UserNotFound
+
+    def namechange(self, name):
+        &#34;&#34;&#34;Change player name.&#34;&#34;&#34;
+        name = name.split(&#34; &#34;)
+        name = name[0]
+        name[0].upper()
+        &#34;&#34;&#34;Check for namechange availability.&#34;&#34;&#34;
+        for p in self.list_players:
+            if p.username == name:
+                raise AlreadyExists
+        &#34;&#34;&#34;if no error is raised, continue with the change.&#34;&#34;&#34;
+        self.curr_player.username = name
+        return name
+
+    def quit(self):
+        &#34;&#34;&#34;Exit the game.&#34;&#34;&#34;
+        raise SystemExit()
+
+    def start_reset_restart(self):
+        &#34;&#34;&#34;Reset players and restarting game.&#34;&#34;&#34;
+        self.player_1.reset()
+        if isinstance(self.player_2, player.Player):
+            self.player_2.reset()
+        else:
+            self.player_2.points_held = 0
+
+    def has_won(self):
+        &#34;&#34;&#34;Determine if player has won or not.&#34;&#34;&#34;
+        if self.curr_player.points_held &gt;= 100:
+            return True
+        else:
+            return False
+
+    def hold(self):
+        &#34;&#34;&#34;Add the input points to the current points of player.&#34;&#34;&#34;
+        self.curr_player.points_held += self.curr_points
+
+    def roll(self):
+        &#34;&#34;&#34;Call roll function.&#34;&#34;&#34;
+        rolled = 0
+        if isinstance(self.curr_player, player.Player):
+            rolled = self.curr_player.roll()
+        else:
+            rolled = self.curr_player.roll(computer.Computer)
+        self.curr_points += rolled
+        return rolled
+
+    def next_player(self):
+        &#34;&#34;&#34;Switch current player.&#34;&#34;&#34;
+        if self.curr_player != self.player_1:
+            self.player_2 = self.curr_player  # save to player_2
+            self.curr_player = self.player_1
+        elif self.curr_player != self.player_2:
+            self.player_1 = self.curr_player  # save to player_1
+            self.curr_player = self.player_2
+            if isinstance(self.player_2, computer.Computer):
+                computer.Computer.reset_action_pool(computer.Computer)
+        return self.curr_player
+
+    def reset_curr_points(self):
+        &#34;&#34;&#34;Reset the current points tally.&#34;&#34;&#34;
+        self.curr_points = 0
+
+    def create_screen(self):
+        &#34;&#34;&#34;Instructions for creating a new account.&#34;&#34;&#34;
+        return &#34;Enter &lt;create&gt; followed by a username and password&#34;
+
+    def clear_screen(self):
+        &#34;&#34;&#34;Clear the game-screen.&#34;&#34;&#34;
+        subprocess.run(
+            &#34;cls&#34; if platform.system() == &#34;Windows&#34; else &#34;clear&#34;, shell=True
+            )
+        return
+
+    def update(self):
+        &#34;&#34;&#34;Test that user scores are updated correctly.&#34;&#34;&#34;
+        if self.curr_player.username != &#34;Computer&#34;:
+            self.curr_player.set_highscore()
+            leaderboards.Leaderboards.update(
+                leaderboards.Leaderboards, self.curr_player
+                )
+            return True
+        else:
+            return False
+
+    def get_scoreboard(self):
+        &#34;&#34;&#34;Return scoreboard.&#34;&#34;&#34;
+        return leaderboards.Leaderboards.scoreboard
+
+    def err_msg(self):
+        &#34;&#34;&#34;Print error message.&#34;&#34;&#34;
+        flav = random.choice(self.error_msg_flavor)
+        return self.error_msg.format(flav) + &#34;\n&#34;
+
+    def scores(self):
+        &#34;&#34;&#34;Present current scores.&#34;&#34;&#34;
+        msg = &#34;\t\t\t[ {} : {} points || {} : {} points ]\n&#34;
+        msg = msg.format(
+            self.player_1.username,
+            self.player_1.points_held,
+            self.player_2.username,
+            self.player_2.points_held
+            )
+        return msg
+
+    def writer(self):
+        &#34;&#34;&#34;Write to file.&#34;&#34;&#34;
+        return synchronization.Sync().pickle_write()
+
+    def reader(self):
+        &#34;&#34;&#34;Read from file.&#34;&#34;&#34;
+        return synchronization.Sync().pickle_read()
+
+    def set_filepath(self, file, path):
+        &#34;&#34;&#34;Set path to files.&#34;&#34;&#34;
+        if file == &#39;file1&#39;:
+            synchronization.Sync.file1 = path
+        elif file == &#39;file2&#39;:
+            synchronization.Sync.file2 = path
+
+    def set_computer(self):
+        &#34;&#34;&#34;Access static computer and assign as player_2.&#34;&#34;&#34;
+        self.player_2 = computer.Computer
+
+    def set_computer_difficulty(self, difficulty):
+        &#34;&#34;&#34;Set computer difficulty to that which is specified by the user.&#34;&#34;&#34;
+        msg = f&#34;You successfully have selected {difficulty} difficulty!&#34;
+        computer.Computer.difficulty = difficulty
+        return msg
+
+    def comp_choice(self):
+        &#34;&#34;&#34;Retrieve an action from the computer&#39;s action_pool attribute.&#34;&#34;&#34;
+        action = random.choice(computer.Computer.action_pool)
+
+        &#34;&#34;&#34; replace a roll with hold in action_pool(+5% chance to hold) &#34;&#34;&#34;
+        for option in computer.Computer.action_pool:
+            if option == &#34;roll&#34;:
+                option == &#34;hold&#34;
+                break
+        return action</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="development.game.Game"><code class="flex name class">
+<span>class <span class="ident">Game</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Game class.</p>
+<p>Contructor.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Game():
+    &#34;&#34;&#34;Game class.&#34;&#34;&#34;
+
+    position = &#34;menu&#34;  # where you&#39;re currently navigating within the game
+    list_players = []
+    player_1 = player.Player
+    player_2 = player.Player
+    curr_player = player.Player
+    curr_points = 0
+    can_login = can_create = True
+    error_msg_flavor = (
+        &#34;No lo comprendo&#34;,
+        &#34;No ho entenc&#34;,
+        &#34;Oh mon Dieu&#34;,
+        &#34;Dios mio&#34;,
+        &#34;Je ne le comprends pas&#34;,
+        &#34;Non lo capisco&#34;,
+        &#34;Jag förstår det inte&#34;,
+        &#34;Jeg forstår ikke&#34;,
+        &#34;Oh mio Dio&#34;,
+        &#34;Meu Deus&#34;,
+        &#34;Não compreendo&#34;,
+        &#34;Não percebo&#34;
+    )
+    error_msg = &#34;&gt;&gt; {}! That can&#39;t be done right now.&#34;
+
+    def __init__(self):
+        &#34;&#34;&#34;Contructor.&#34;&#34;&#34;
+        try:
+            synchronization.Sync().pickle_read()
+        except FileNotFoundError:
+            synchronization.Sync().pickle_write()
+
+    def help(self):
+        &#34;&#34;&#34;Help Menu.&#34;&#34;&#34;
+        msg = &#34;&#34;&#34;
+            \t_______________________________________________________________
+
+            \t        Welcome to our help menu! Here are your options
+            \t_______________________________________________________________
+
+            \t-------------
+            \t  GAMEPLAY
+            \t-------------
+            \tr / roll         Roll the dice
+            \th / hold         Hold your score (ends your turn)
+            \tre / restart     Restart the game and discard your score
+            \tcheat            Enter cheat mode. *Using this will disqualify
+            \t                 you from earning any highscores this round
+
+            \t-------------
+            \t    USER
+            \t-------------
+            \tcreate           Create a new player
+            \tlogin            Log in as an existing player
+            \tstats            Show current player statistics
+            \tstats &lt;name&gt;     Show the statistics of player 1 or player 2
+            \tlb/leaderboard   Show global leaderboards
+            \tnamechange       change your username (does not change previous
+            \t                 Scoreboard scores)
+
+            \t-------------
+            \t  GENERAL
+            \t-------------
+            \tclear            clears the screen
+            \trules            print out the rules for the game
+            \thelp             Brings up (this) help menu
+            \tq / quit         Quits the game
+            \te / exit         Quits the game
+            &#34;&#34;&#34;
+        return msg
+
+    def show_menu(self):
+        &#34;&#34;&#34;Show game menu.&#34;&#34;&#34;
+        self.position = &#34;menu&#34;
+        oink = &#34;&#34;&#34;
+
+                              __ _________________
+                            /  /  V               \\9-
+                           /0 / 0                  |
+                          |o:o|                    |
+                            \\       _________     /
+                             \\ \\   |        | |   |
+                              \\_\\__|        |_|__/
+        ________________________________________________________________
+
+             &gt;&gt;&gt;&gt;&gt;&gt;   What game mode would you like to play?   &lt;&lt;&lt;&lt;&lt;&lt;
+        ________________________________________________________________
+
+            choose 1                Player vs. Player
+            choose 2                Player vs. Computer
+            quit                    Quit the game\n\n\n&#34;&#34;&#34;
+        return oink
+
+    def create_player(self, info):
+        &#34;&#34;&#34;Create instance of player class.&#34;&#34;&#34;
+        if isinstance(info, str):
+            info = info.split(&#34; &#34;)
+        username = info[0]
+        password = info[1]
+        &#34;&#34;&#34; creates a new player &#34;&#34;&#34;
+
+        names_not_allowed = (
+            &#34;computer&#34;,
+            &#34;pig&#34;,
+            &#34;test&#34;,
+            &#34;user&#34;,
+            &#34;tester&#34;,
+            &#34;random&#34;,
+            &#34;example&#34;
+            )
+
+        if username.lower() not in names_not_allowed:
+            new_player = player.Player(username, password)
+            if len(self.list_players) &gt; 0:
+                for p in self.list_players:
+                    if new_player.username == p.username:
+                        raise AlreadyExists
+            self.list_players.append(new_player)
+            return True
+        else:
+            return False
+
+    def show_rules(self):
+        &#34;&#34;&#34;Show menu of rules.&#34;&#34;&#34;
+        self.position = &#34;rules&#34;
+        msg = &#34;&#34;&#34;
+
+              RULES |
+                1   |   You may roll until you hold your score or roll 1
+                2   |   Holding saves your accumulated points to your total
+                3   |   Rolling 1 loses you all your unheld points
+                4   |   The first player to hold a score of 100 points wins.
+
+        &#34;&#34;&#34;
+        return msg
+
+    def login(self, info):
+        &#34;&#34;&#34;Log in the user and sets the match as player.&#34;&#34;&#34;
+        username = info[0]
+        username = username[0].upper() + username[1:]
+        password = info[1]
+
+        for p in self.list_players:
+            if username == p.username and password == p.password:
+                if self.player_1.username != &#34;&#34;:
+                    self.player_2 = p
+                else:
+                    self.player_1 = p
+                self.can_login = False
+                return True
+        raise UserNotFound
+
+    def namechange(self, name):
+        &#34;&#34;&#34;Change player name.&#34;&#34;&#34;
+        name = name.split(&#34; &#34;)
+        name = name[0]
+        name[0].upper()
+        &#34;&#34;&#34;Check for namechange availability.&#34;&#34;&#34;
+        for p in self.list_players:
+            if p.username == name:
+                raise AlreadyExists
+        &#34;&#34;&#34;if no error is raised, continue with the change.&#34;&#34;&#34;
+        self.curr_player.username = name
+        return name
+
+    def quit(self):
+        &#34;&#34;&#34;Exit the game.&#34;&#34;&#34;
+        raise SystemExit()
+
+    def start_reset_restart(self):
+        &#34;&#34;&#34;Reset players and restarting game.&#34;&#34;&#34;
+        self.player_1.reset()
+        if isinstance(self.player_2, player.Player):
+            self.player_2.reset()
+        else:
+            self.player_2.points_held = 0
+
+    def has_won(self):
+        &#34;&#34;&#34;Determine if player has won or not.&#34;&#34;&#34;
+        if self.curr_player.points_held &gt;= 100:
+            return True
+        else:
+            return False
+
+    def hold(self):
+        &#34;&#34;&#34;Add the input points to the current points of player.&#34;&#34;&#34;
+        self.curr_player.points_held += self.curr_points
+
+    def roll(self):
+        &#34;&#34;&#34;Call roll function.&#34;&#34;&#34;
+        rolled = 0
+        if isinstance(self.curr_player, player.Player):
+            rolled = self.curr_player.roll()
+        else:
+            rolled = self.curr_player.roll(computer.Computer)
+        self.curr_points += rolled
+        return rolled
+
+    def next_player(self):
+        &#34;&#34;&#34;Switch current player.&#34;&#34;&#34;
+        if self.curr_player != self.player_1:
+            self.player_2 = self.curr_player  # save to player_2
+            self.curr_player = self.player_1
+        elif self.curr_player != self.player_2:
+            self.player_1 = self.curr_player  # save to player_1
+            self.curr_player = self.player_2
+            if isinstance(self.player_2, computer.Computer):
+                computer.Computer.reset_action_pool(computer.Computer)
+        return self.curr_player
+
+    def reset_curr_points(self):
+        &#34;&#34;&#34;Reset the current points tally.&#34;&#34;&#34;
+        self.curr_points = 0
+
+    def create_screen(self):
+        &#34;&#34;&#34;Instructions for creating a new account.&#34;&#34;&#34;
+        return &#34;Enter &lt;create&gt; followed by a username and password&#34;
+
+    def clear_screen(self):
+        &#34;&#34;&#34;Clear the game-screen.&#34;&#34;&#34;
+        subprocess.run(
+            &#34;cls&#34; if platform.system() == &#34;Windows&#34; else &#34;clear&#34;, shell=True
+            )
+        return
+
+    def update(self):
+        &#34;&#34;&#34;Test that user scores are updated correctly.&#34;&#34;&#34;
+        if self.curr_player.username != &#34;Computer&#34;:
+            self.curr_player.set_highscore()
+            leaderboards.Leaderboards.update(
+                leaderboards.Leaderboards, self.curr_player
+                )
+            return True
+        else:
+            return False
+
+    def get_scoreboard(self):
+        &#34;&#34;&#34;Return scoreboard.&#34;&#34;&#34;
+        return leaderboards.Leaderboards.scoreboard
+
+    def err_msg(self):
+        &#34;&#34;&#34;Print error message.&#34;&#34;&#34;
+        flav = random.choice(self.error_msg_flavor)
+        return self.error_msg.format(flav) + &#34;\n&#34;
+
+    def scores(self):
+        &#34;&#34;&#34;Present current scores.&#34;&#34;&#34;
+        msg = &#34;\t\t\t[ {} : {} points || {} : {} points ]\n&#34;
+        msg = msg.format(
+            self.player_1.username,
+            self.player_1.points_held,
+            self.player_2.username,
+            self.player_2.points_held
+            )
+        return msg
+
+    def writer(self):
+        &#34;&#34;&#34;Write to file.&#34;&#34;&#34;
+        return synchronization.Sync().pickle_write()
+
+    def reader(self):
+        &#34;&#34;&#34;Read from file.&#34;&#34;&#34;
+        return synchronization.Sync().pickle_read()
+
+    def set_filepath(self, file, path):
+        &#34;&#34;&#34;Set path to files.&#34;&#34;&#34;
+        if file == &#39;file1&#39;:
+            synchronization.Sync.file1 = path
+        elif file == &#39;file2&#39;:
+            synchronization.Sync.file2 = path
+
+    def set_computer(self):
+        &#34;&#34;&#34;Access static computer and assign as player_2.&#34;&#34;&#34;
+        self.player_2 = computer.Computer
+
+    def set_computer_difficulty(self, difficulty):
+        &#34;&#34;&#34;Set computer difficulty to that which is specified by the user.&#34;&#34;&#34;
+        msg = f&#34;You successfully have selected {difficulty} difficulty!&#34;
+        computer.Computer.difficulty = difficulty
+        return msg
+
+    def comp_choice(self):
+        &#34;&#34;&#34;Retrieve an action from the computer&#39;s action_pool attribute.&#34;&#34;&#34;
+        action = random.choice(computer.Computer.action_pool)
+
+        &#34;&#34;&#34; replace a roll with hold in action_pool(+5% chance to hold) &#34;&#34;&#34;
+        for option in computer.Computer.action_pool:
+            if option == &#34;roll&#34;:
+                option == &#34;hold&#34;
+                break
+        return action</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="development.game.Game.can_create"><code class="name">var <span class="ident">can_create</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.game.Game.can_login"><code class="name">var <span class="ident">can_login</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.game.Game.curr_player"><code class="name">var <span class="ident">curr_player</span></code></dt>
+<dd>
+<div class="desc"><p>Player class of pig game.</p></div>
+</dd>
+<dt id="development.game.Game.curr_points"><code class="name">var <span class="ident">curr_points</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.game.Game.error_msg"><code class="name">var <span class="ident">error_msg</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.game.Game.error_msg_flavor"><code class="name">var <span class="ident">error_msg_flavor</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.game.Game.list_players"><code class="name">var <span class="ident">list_players</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="development.game.Game.player_1"><code class="name">var <span class="ident">player_1</span></code></dt>
+<dd>
+<div class="desc"><p>Player class of pig game.</p></div>
+</dd>
+<dt id="development.game.Game.player_2"><code class="name">var <span class="ident">player_2</span></code></dt>
+<dd>
+<div class="desc"><p>Player class of pig game.</p></div>
+</dd>
+<dt id="development.game.Game.position"><code class="name">var <span class="ident">position</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="development.game.Game.clear_screen"><code class="name flex">
+<span>def <span class="ident">clear_screen</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Clear the game-screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_screen(self):
+    &#34;&#34;&#34;Clear the game-screen.&#34;&#34;&#34;
+    subprocess.run(
+        &#34;cls&#34; if platform.system() == &#34;Windows&#34; else &#34;clear&#34;, shell=True
+        )
+    return</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.comp_choice"><code class="name flex">
+<span>def <span class="ident">comp_choice</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieve an action from the computer's action_pool attribute.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def comp_choice(self):
+    &#34;&#34;&#34;Retrieve an action from the computer&#39;s action_pool attribute.&#34;&#34;&#34;
+    action = random.choice(computer.Computer.action_pool)
+
+    &#34;&#34;&#34; replace a roll with hold in action_pool(+5% chance to hold) &#34;&#34;&#34;
+    for option in computer.Computer.action_pool:
+        if option == &#34;roll&#34;:
+            option == &#34;hold&#34;
+            break
+    return action</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.create_player"><code class="name flex">
+<span>def <span class="ident">create_player</span></span>(<span>self, info)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create instance of player class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_player(self, info):
+    &#34;&#34;&#34;Create instance of player class.&#34;&#34;&#34;
+    if isinstance(info, str):
+        info = info.split(&#34; &#34;)
+    username = info[0]
+    password = info[1]
+    &#34;&#34;&#34; creates a new player &#34;&#34;&#34;
+
+    names_not_allowed = (
+        &#34;computer&#34;,
+        &#34;pig&#34;,
+        &#34;test&#34;,
+        &#34;user&#34;,
+        &#34;tester&#34;,
+        &#34;random&#34;,
+        &#34;example&#34;
+        )
+
+    if username.lower() not in names_not_allowed:
+        new_player = player.Player(username, password)
+        if len(self.list_players) &gt; 0:
+            for p in self.list_players:
+                if new_player.username == p.username:
+                    raise AlreadyExists
+        self.list_players.append(new_player)
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.create_screen"><code class="name flex">
+<span>def <span class="ident">create_screen</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Instructions for creating a new account.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_screen(self):
+    &#34;&#34;&#34;Instructions for creating a new account.&#34;&#34;&#34;
+    return &#34;Enter &lt;create&gt; followed by a username and password&#34;</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.err_msg"><code class="name flex">
+<span>def <span class="ident">err_msg</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print error message.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def err_msg(self):
+    &#34;&#34;&#34;Print error message.&#34;&#34;&#34;
+    flav = random.choice(self.error_msg_flavor)
+    return self.error_msg.format(flav) + &#34;\n&#34;</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.get_scoreboard"><code class="name flex">
+<span>def <span class="ident">get_scoreboard</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return scoreboard.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_scoreboard(self):
+    &#34;&#34;&#34;Return scoreboard.&#34;&#34;&#34;
+    return leaderboards.Leaderboards.scoreboard</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.has_won"><code class="name flex">
+<span>def <span class="ident">has_won</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine if player has won or not.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def has_won(self):
+    &#34;&#34;&#34;Determine if player has won or not.&#34;&#34;&#34;
+    if self.curr_player.points_held &gt;= 100:
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.help"><code class="name flex">
+<span>def <span class="ident">help</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Help Menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def help(self):
+    &#34;&#34;&#34;Help Menu.&#34;&#34;&#34;
+    msg = &#34;&#34;&#34;
+        \t_______________________________________________________________
+
+        \t        Welcome to our help menu! Here are your options
+        \t_______________________________________________________________
+
+        \t-------------
+        \t  GAMEPLAY
+        \t-------------
+        \tr / roll         Roll the dice
+        \th / hold         Hold your score (ends your turn)
+        \tre / restart     Restart the game and discard your score
+        \tcheat            Enter cheat mode. *Using this will disqualify
+        \t                 you from earning any highscores this round
+
+        \t-------------
+        \t    USER
+        \t-------------
+        \tcreate           Create a new player
+        \tlogin            Log in as an existing player
+        \tstats            Show current player statistics
+        \tstats &lt;name&gt;     Show the statistics of player 1 or player 2
+        \tlb/leaderboard   Show global leaderboards
+        \tnamechange       change your username (does not change previous
+        \t                 Scoreboard scores)
+
+        \t-------------
+        \t  GENERAL
+        \t-------------
+        \tclear            clears the screen
+        \trules            print out the rules for the game
+        \thelp             Brings up (this) help menu
+        \tq / quit         Quits the game
+        \te / exit         Quits the game
+        &#34;&#34;&#34;
+    return msg</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.hold"><code class="name flex">
+<span>def <span class="ident">hold</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add the input points to the current points of player.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def hold(self):
+    &#34;&#34;&#34;Add the input points to the current points of player.&#34;&#34;&#34;
+    self.curr_player.points_held += self.curr_points</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.login"><code class="name flex">
+<span>def <span class="ident">login</span></span>(<span>self, info)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Log in the user and sets the match as player.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def login(self, info):
+    &#34;&#34;&#34;Log in the user and sets the match as player.&#34;&#34;&#34;
+    username = info[0]
+    username = username[0].upper() + username[1:]
+    password = info[1]
+
+    for p in self.list_players:
+        if username == p.username and password == p.password:
+            if self.player_1.username != &#34;&#34;:
+                self.player_2 = p
+            else:
+                self.player_1 = p
+            self.can_login = False
+            return True
+    raise UserNotFound</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.namechange"><code class="name flex">
+<span>def <span class="ident">namechange</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Change player name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def namechange(self, name):
+    &#34;&#34;&#34;Change player name.&#34;&#34;&#34;
+    name = name.split(&#34; &#34;)
+    name = name[0]
+    name[0].upper()
+    &#34;&#34;&#34;Check for namechange availability.&#34;&#34;&#34;
+    for p in self.list_players:
+        if p.username == name:
+            raise AlreadyExists
+    &#34;&#34;&#34;if no error is raised, continue with the change.&#34;&#34;&#34;
+    self.curr_player.username = name
+    return name</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.next_player"><code class="name flex">
+<span>def <span class="ident">next_player</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Switch current player.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_player(self):
+    &#34;&#34;&#34;Switch current player.&#34;&#34;&#34;
+    if self.curr_player != self.player_1:
+        self.player_2 = self.curr_player  # save to player_2
+        self.curr_player = self.player_1
+    elif self.curr_player != self.player_2:
+        self.player_1 = self.curr_player  # save to player_1
+        self.curr_player = self.player_2
+        if isinstance(self.player_2, computer.Computer):
+            computer.Computer.reset_action_pool(computer.Computer)
+    return self.curr_player</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.quit"><code class="name flex">
+<span>def <span class="ident">quit</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exit the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def quit(self):
+    &#34;&#34;&#34;Exit the game.&#34;&#34;&#34;
+    raise SystemExit()</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.reader"><code class="name flex">
+<span>def <span class="ident">reader</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read from file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reader(self):
+    &#34;&#34;&#34;Read from file.&#34;&#34;&#34;
+    return synchronization.Sync().pickle_read()</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.reset_curr_points"><code class="name flex">
+<span>def <span class="ident">reset_curr_points</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reset the current points tally.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_curr_points(self):
+    &#34;&#34;&#34;Reset the current points tally.&#34;&#34;&#34;
+    self.curr_points = 0</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.roll"><code class="name flex">
+<span>def <span class="ident">roll</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Call roll function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def roll(self):
+    &#34;&#34;&#34;Call roll function.&#34;&#34;&#34;
+    rolled = 0
+    if isinstance(self.curr_player, player.Player):
+        rolled = self.curr_player.roll()
+    else:
+        rolled = self.curr_player.roll(computer.Computer)
+    self.curr_points += rolled
+    return rolled</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.scores"><code class="name flex">
+<span>def <span class="ident">scores</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Present current scores.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def scores(self):
+    &#34;&#34;&#34;Present current scores.&#34;&#34;&#34;
+    msg = &#34;\t\t\t[ {} : {} points || {} : {} points ]\n&#34;
+    msg = msg.format(
+        self.player_1.username,
+        self.player_1.points_held,
+        self.player_2.username,
+        self.player_2.points_held
+        )
+    return msg</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.set_computer"><code class="name flex">
+<span>def <span class="ident">set_computer</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Access static computer and assign as player_2.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_computer(self):
+    &#34;&#34;&#34;Access static computer and assign as player_2.&#34;&#34;&#34;
+    self.player_2 = computer.Computer</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.set_computer_difficulty"><code class="name flex">
+<span>def <span class="ident">set_computer_difficulty</span></span>(<span>self, difficulty)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set computer difficulty to that which is specified by the user.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_computer_difficulty(self, difficulty):
+    &#34;&#34;&#34;Set computer difficulty to that which is specified by the user.&#34;&#34;&#34;
+    msg = f&#34;You successfully have selected {difficulty} difficulty!&#34;
+    computer.Computer.difficulty = difficulty
+    return msg</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.set_filepath"><code class="name flex">
+<span>def <span class="ident">set_filepath</span></span>(<span>self, file, path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set path to files.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_filepath(self, file, path):
+    &#34;&#34;&#34;Set path to files.&#34;&#34;&#34;
+    if file == &#39;file1&#39;:
+        synchronization.Sync.file1 = path
+    elif file == &#39;file2&#39;:
+        synchronization.Sync.file2 = path</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.show_menu"><code class="name flex">
+<span>def <span class="ident">show_menu</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show game menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_menu(self):
+    &#34;&#34;&#34;Show game menu.&#34;&#34;&#34;
+    self.position = &#34;menu&#34;
+    oink = &#34;&#34;&#34;
+
+                          __ _________________
+                        /  /  V               \\9-
+                       /0 / 0                  |
+                      |o:o|                    |
+                        \\       _________     /
+                         \\ \\   |        | |   |
+                          \\_\\__|        |_|__/
+    ________________________________________________________________
+
+         &gt;&gt;&gt;&gt;&gt;&gt;   What game mode would you like to play?   &lt;&lt;&lt;&lt;&lt;&lt;
+    ________________________________________________________________
+
+        choose 1                Player vs. Player
+        choose 2                Player vs. Computer
+        quit                    Quit the game\n\n\n&#34;&#34;&#34;
+    return oink</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.show_rules"><code class="name flex">
+<span>def <span class="ident">show_rules</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show menu of rules.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_rules(self):
+    &#34;&#34;&#34;Show menu of rules.&#34;&#34;&#34;
+    self.position = &#34;rules&#34;
+    msg = &#34;&#34;&#34;
+
+          RULES |
+            1   |   You may roll until you hold your score or roll 1
+            2   |   Holding saves your accumulated points to your total
+            3   |   Rolling 1 loses you all your unheld points
+            4   |   The first player to hold a score of 100 points wins.
+
+    &#34;&#34;&#34;
+    return msg</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.start_reset_restart"><code class="name flex">
+<span>def <span class="ident">start_reset_restart</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reset players and restarting game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def start_reset_restart(self):
+    &#34;&#34;&#34;Reset players and restarting game.&#34;&#34;&#34;
+    self.player_1.reset()
+    if isinstance(self.player_2, player.Player):
+        self.player_2.reset()
+    else:
+        self.player_2.points_held = 0</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test that user scores are updated correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self):
+    &#34;&#34;&#34;Test that user scores are updated correctly.&#34;&#34;&#34;
+    if self.curr_player.username != &#34;Computer&#34;:
+        self.curr_player.set_highscore()
+        leaderboards.Leaderboards.update(
+            leaderboards.Leaderboards, self.curr_player
+            )
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+<dt id="development.game.Game.writer"><code class="name flex">
+<span>def <span class="ident">writer</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write to file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def writer(self):
+    &#34;&#34;&#34;Write to file.&#34;&#34;&#34;
+    return synchronization.Sync().pickle_write()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="development" href="index.html">development</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="development.game.Game" href="#development.game.Game">Game</a></code></h4>
+<ul class="">
+<li><code><a title="development.game.Game.can_create" href="#development.game.Game.can_create">can_create</a></code></li>
+<li><code><a title="development.game.Game.can_login" href="#development.game.Game.can_login">can_login</a></code></li>
+<li><code><a title="development.game.Game.clear_screen" href="#development.game.Game.clear_screen">clear_screen</a></code></li>
+<li><code><a title="development.game.Game.comp_choice" href="#development.game.Game.comp_choice">comp_choice</a></code></li>
+<li><code><a title="development.game.Game.create_player" href="#development.game.Game.create_player">create_player</a></code></li>
+<li><code><a title="development.game.Game.create_screen" href="#development.game.Game.create_screen">create_screen</a></code></li>
+<li><code><a title="development.game.Game.curr_player" href="#development.game.Game.curr_player">curr_player</a></code></li>
+<li><code><a title="development.game.Game.curr_points" href="#development.game.Game.curr_points">curr_points</a></code></li>
+<li><code><a title="development.game.Game.err_msg" href="#development.game.Game.err_msg">err_msg</a></code></li>
+<li><code><a title="development.game.Game.error_msg" href="#development.game.Game.error_msg">error_msg</a></code></li>
+<li><code><a title="development.game.Game.error_msg_flavor" href="#development.game.Game.error_msg_flavor">error_msg_flavor</a></code></li>
+<li><code><a title="development.game.Game.get_scoreboard" href="#development.game.Game.get_scoreboard">get_scoreboard</a></code></li>
+<li><code><a title="development.game.Game.has_won" href="#development.game.Game.has_won">has_won</a></code></li>
+<li><code><a title="development.game.Game.help" href="#development.game.Game.help">help</a></code></li>
+<li><code><a title="development.game.Game.hold" href="#development.game.Game.hold">hold</a></code></li>
+<li><code><a title="development.game.Game.list_players" href="#development.game.Game.list_players">list_players</a></code></li>
+<li><code><a title="development.game.Game.login" href="#development.game.Game.login">login</a></code></li>
+<li><code><a title="development.game.Game.namechange" href="#development.game.Game.namechange">namechange</a></code></li>
+<li><code><a title="development.game.Game.next_player" href="#development.game.Game.next_player">next_player</a></code></li>
+<li><code><a title="development.game.Game.player_1" href="#development.game.Game.player_1">player_1</a></code></li>
+<li><code><a title="development.game.Game.player_2" href="#development.game.Game.player_2">player_2</a></code></li>
+<li><code><a title="development.game.Game.position" href="#development.game.Game.position">position</a></code></li>
+<li><code><a title="development.game.Game.quit" href="#development.game.Game.quit">quit</a></code></li>
+<li><code><a title="development.game.Game.reader" href="#development.game.Game.reader">reader</a></code></li>
+<li><code><a title="development.game.Game.reset_curr_points" href="#development.game.Game.reset_curr_points">reset_curr_points</a></code></li>
+<li><code><a title="development.game.Game.roll" href="#development.game.Game.roll">roll</a></code></li>
+<li><code><a title="development.game.Game.scores" href="#development.game.Game.scores">scores</a></code></li>
+<li><code><a title="development.game.Game.set_computer" href="#development.game.Game.set_computer">set_computer</a></code></li>
+<li><code><a title="development.game.Game.set_computer_difficulty" href="#development.game.Game.set_computer_difficulty">set_computer_difficulty</a></code></li>
+<li><code><a title="development.game.Game.set_filepath" href="#development.game.Game.set_filepath">set_filepath</a></code></li>
+<li><code><a title="development.game.Game.show_menu" href="#development.game.Game.show_menu">show_menu</a></code></li>
+<li><code><a title="development.game.Game.show_rules" href="#development.game.Game.show_rules">show_rules</a></code></li>
+<li><code><a title="development.game.Game.start_reset_restart" href="#development.game.Game.start_reset_restart">start_reset_restart</a></code></li>
+<li><code><a title="development.game.Game.update" href="#development.game.Game.update">update</a></code></li>
+<li><code><a title="development.game.Game.writer" href="#development.game.Game.writer">writer</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

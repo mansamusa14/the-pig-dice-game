@@ -1,0 +1,1388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>development.game_test API documentation</title>
+<meta name="description" content="Test the game logic behind our Pig game." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>development.game_test</code></h1>
+</header>
+<section id="section-intro">
+<p>Test the game logic behind our Pig game.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Test the game logic behind our Pig game.&#34;&#34;&#34;
+
+from error_handling.already_exists import AlreadyExists
+from error_handling.user_not_found import UserNotFound
+from unittest.mock import patch
+import unittest
+import player
+import computer
+import dice
+import leaderboards
+import synchronization
+import game
+import os
+
+
+class TestGame(unittest.TestCase):
+    &#34;&#34;&#34;Ensure everything works.&#34;&#34;&#34;
+
+    def setUp(self):
+        &#34;&#34;&#34;Run on every test.&#34;&#34;&#34;
+        self.game = game.Game()
+        self.dice = dice.Dice()
+        self.computer = computer.Computer()
+        self.leaderboards = leaderboards.Leaderboards()
+        self.player1 = player.Player(&#34;John&#34;, &#34;test&#34;)
+        self.player2 = player.Player(&#34;Jane&#34;, &#34;test&#34;)
+
+    def tearDown(self) -&gt; None:
+        &#34;&#34;&#34;Tear down everything previously set up after every test.&#34;&#34;&#34;
+        return super().tearDown()
+
+    def test_init(self):
+        &#34;&#34;&#34;Mock sync instance.&#34;&#34;&#34;
+        sync = synchronization.Sync()
+        self.assertTrue(os.path.exists(sync.file1))
+        self.assertTrue(os.path.exists(sync.file2))
+        os.remove(sync.file1)
+        os.remove(sync.file2)
+        self.assertFalse(os.path.exists(sync.file1))
+        self.assertFalse(os.path.exists(sync.file2))
+
+    def test_help(self):
+        &#34;&#34;&#34;Help Menu Test.&#34;&#34;&#34;
+        res = self.game.help()
+        self.assertIsInstance(res, str)
+
+    def test_list_players(self):
+        &#34;&#34;&#34;Testing list_players variable.&#34;&#34;&#34;
+        self.assertEqual(self.game.list_players, [])
+
+    def test_create_player(self):
+        &#34;&#34;&#34;Test Player Creation.&#34;&#34;&#34;
+        &#34;&#34;&#34;ensure object instantiates correctly.&#34;&#34;&#34;
+        self.assertEqual(self.player1.username, &#34;John&#34;)
+        self.assertEqual(self.player1.password, &#34;test&#34;)
+        self.assertEqual(self.player1.wins, 0)
+        self.assertEqual(self.player1.points_held, 0)
+        self.assertEqual(self.player1.top_scores, (0, 0, 0, 0, 0))
+        with self.assertRaises(IndexError):
+            self.player1.top_scores[6]
+
+        &#34;&#34;&#34;test for some of the invalid names.&#34;&#34;&#34;
+        self.assertFalse(self.game.create_player(&#34;Computer test&#34;))
+        self.assertFalse(self.game.create_player(&#34;Pig test&#34;))
+        self.assertFalse(self.game.create_player(&#34;Test test&#34;))
+        self.assertFalse(self.game.create_player(&#34;uSeR test&#34;))
+        self.assertFalse(self.game.create_player(&#34;EXAMPLE test&#34;))
+
+        &#34;&#34;&#34;test for duplicate error handling.&#34;&#34;&#34;
+        self.game.list_players.append(self.player1)
+        info = self.player1.username + &#34; &#34; + self.player1.password
+        with self.assertRaises(AlreadyExists):
+            self.game.create_player(info)
+        self.game.list_players.clear()
+        self.assertTrue(self.game.create_player(&#34;Jane test&#34;))
+
+    def test_show_menu(self):
+        &#34;&#34;&#34;Test main menu is of type String.&#34;&#34;&#34;
+        res = self.game.show_menu()
+        self.assertIsInstance(res, str)
+        self.assertIs(self.game.position, &#34;menu&#34;)
+
+    def test_show_rules(self):
+        &#34;&#34;&#34;Test Show_rules().&#34;&#34;&#34;
+        res = self.game.show_rules()
+        self.assertIsInstance(res, str)
+        self.assertIs(self.game.position, &#34;rules&#34;)
+
+    def test_login(self):
+        &#34;&#34;&#34;Test login.&#34;&#34;&#34;
+        info = &#34;John Test&#34;
+        info2 = &#34;Jane Test&#34;
+        info = info.split(&#34; &#34;)
+        info2 = info2.split(&#34; &#34;)
+
+        with self.assertRaises(TypeError):
+            self.game.login(3)
+
+        &#34;&#34;&#34;Test login with an invalid account.&#34;&#34;&#34;
+        with self.assertRaises(UserNotFound):
+            self.game.login(info)
+
+        &#34;&#34;&#34;Create mock players.&#34;&#34;&#34;
+        self.game.create_player(info)
+        self.game.create_player(info2)
+
+        self.assertTrue(len(self.game.list_players), 2)
+
+        &#34;&#34;&#34;Test login with newly added account.&#34;&#34;&#34;
+        self.assertTrue(self.game.login(info))
+        self.assertTrue(self.game.login(info2))
+        self.assertEqual(self.game.player_1.username, &#34;John&#34;)
+        self.assertEqual(self.game.player_2.username, &#34;Jane&#34;)
+
+    def test_namechange(self):
+        &#34;&#34;&#34;Test namechange.&#34;&#34;&#34;
+        self.game.list_players.append(self.player1)
+        self.game.list_players.append(self.player2)
+        self.assertEqual(len(self.game.list_players), 2)
+
+        &#34;&#34;&#34;Test error handling on already exists.&#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        with self.assertRaises(AlreadyExists):
+            self.game.namechange(&#34;Jane&#34;)
+        self.game.curr_player = self.player2
+        with self.assertRaises(AlreadyExists):
+            self.game.namechange(&#34;John&#34;)
+
+        &#34;&#34;&#34;Test namechange again with b now available.&#34;&#34;&#34;
+        self.game.list_players.remove(self.player2)  # remove Jane
+        self.assertIs(len(self.game.list_players), 1)
+        self.game.curr_player = self.player1
+        self.game.namechange(&#34;Jane&#34;)
+        self.assertIs(self.game.curr_player.username, &#34;Jane&#34;)
+
+    def test_quit(self):
+        &#34;&#34;&#34;Test quitting.&#34;&#34;&#34;
+        with self.assertRaises(SystemExit):
+            self.game.quit()
+
+    def test_start_reset_restart(self):
+        &#34;&#34;&#34;Test behaviours under pre-determined conditions.&#34;&#34;&#34;
+        self.game.player_1 = self.player1
+        self.game.player_2 = self.player2
+        self.game.player_1.points_held = 99
+        self.game.player_1.cheat()
+        self.game.player_2.points_held = 103
+        self.game.player_2.cheat()
+
+        self.game.start_reset_restart()
+
+        &#34;&#34;&#34;player 1.&#34;&#34;&#34;
+        self.assertEqual(self.player1.points_held, 0)
+        self.assertFalse(self.player1.is_cheating)
+        &#34;&#34;&#34;player 2 is player.&#34;&#34;&#34;
+        self.assertEqual(self.player2.points_held, 0)
+        self.assertFalse(self.player2.is_cheating)
+        &#34;&#34;&#34;player 2 is computer.&#34;&#34;&#34;
+        self.game.player_2 = computer.Computer
+        self.game.player_2.points_held = 89
+        self.assertIs(self.game.player_2.points_held, 89)
+        self.game.start_reset_restart()
+        self.assertIs(self.game.player_2.points_held, 0)
+
+    def test_has_won(self):
+        &#34;&#34;&#34;Test if the player has won after holding.&#34;&#34;&#34;
+        self.player1.points_held = 101
+        self.game.curr_player = self.player1
+        self.assertTrue(self.game.has_won())
+        self.player2.points_held = 99
+        self.game.curr_player = self.player2
+        self.assertFalse(self.game.has_won())
+
+    def test_hold_points(self):
+        &#34;&#34;&#34;Test to see if points are held correctly.&#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        self.game.curr_points = 25
+        self.game.hold()
+        self.assertEqual(self.game.curr_player.points_held, 25)
+
+    def test_roll(self):
+        &#34;&#34;&#34;Ensure roll properties and behaviours are called correctly.&#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        self.assertTrue(1 &lt;= self.game.roll() &lt;= 6)
+
+        &#34;&#34;&#34;Test that the added amount from a roll is correct.&#34;&#34;&#34;
+        q = self.game.curr_points = 30
+        r = self.game.roll()
+        self.assertEqual(self.game.curr_points - q, r)
+
+        &#34;&#34;&#34;Test computer.&#34;&#34;&#34;
+        self.game.curr_player = computer.Computer
+        self.assertTrue(1 &lt;= self.game.roll() &lt;= 6)
+        q = self.game.curr_points = 42
+        r = self.game.roll()
+        self.assertEqual(self.game.curr_points - q, r)
+
+    def test_next_player(self):
+        &#34;&#34;&#34;Tests that switching players happens correctly.&#34;&#34;&#34;
+        self.game.player_1 = self.player1
+        self.game.player_2 = self.player2
+        self.game.curr_player = self.player1
+        self.assertEqual(self.game.next_player(), self.player2)
+        self.assertEqual(self.game.next_player(), self.player1)
+        &#34;&#34;&#34;Test reset on action pool is done correctly on computer.&#34;&#34;&#34;
+        name = self.game.curr_player.username
+        self.assertTrue(name == self.game.player_1.username)
+        self.game.player_2 = self.computer
+        &#34;&#34;&#34;Reverse action pool.&#34;&#34;&#34;
+        self.computer.action_pool = list(reversed(self.computer.action_pool))
+        final_ap = list(self.computer.final_action_pool)
+        self.assertNotEqual(self.computer.action_pool, final_ap)
+        &#34;&#34;&#34; Test next_player resets it.&#34;&#34;&#34;
+        self.assertIsInstance(self.game.next_player(), computer.Computer)
+        self.game.next_player()
+        self.computer = computer.Computer
+        self.assertEqual(self.computer.action_pool, final_ap)
+
+    def test_reset_curr_points(self):
+        &#34;&#34;&#34;Test if resetting current points behaves correctly.&#34;&#34;&#34;
+        self.assertEqual(self.game.curr_points, 0)
+        self.game.curr_points = 89
+        self.assertEqual(self.game.curr_points, 89)
+        self.game.reset_curr_points()
+        self.assertEqual(self.game.curr_points, 0)
+
+    def test_create_screen(self):
+        &#34;&#34;&#34;Testi create_screen().&#34;&#34;&#34;
+        msg = &#34;Enter &lt;create&gt; followed by a username and password&#34;
+        self.assertEqual(self.game.create_screen(), msg)
+
+    def test_set_computer(self):
+        &#34;&#34;&#34;Test set_computer().&#34;&#34;&#34;
+        self.assertFalse(isinstance(self.game.player_2, computer.Computer))
+        self.game.set_computer()
+        self.assertEqual(self.game.player_2, computer.Computer)
+
+    def test_set_computer_difficulty(self):
+        &#34;&#34;&#34;Test if computer difficulty can be set correctly by input.&#34;&#34;&#34;
+        computer.Computer.difficulty = &#34;&#34;
+        self.assertTrue(computer.Computer.difficulty == &#34;&#34;)
+
+        &#34;&#34;&#34;Test all options and return strings.&#34;&#34;&#34;
+        options = (&#34;easy&#34;, &#34;normal&#34;, &#34;hard&#34;)
+        for option in options:
+            exp = f&#34;You successfully have selected {option} difficulty!&#34;
+            self.assertEqual(self.game.set_computer_difficulty(option), exp)
+            self.assertTrue(computer.Computer.difficulty == option)
+
+        &#34;&#34;&#34;Reset computer difficulty.&#34;&#34;&#34;
+        computer.Computer.difficulty == &#34;&#34;
+
+    def test_computer_choice(self):
+        &#34;&#34;&#34;Testing computer_choice().&#34;&#34;&#34;
+        self.game.player_2 = computer.Computer()
+        for _ in range(0, 2):
+            self.game.curr_player = self.game.player_2
+            self.game.curr_player.points_held = 0
+            self.assertNotEqual(self.game.comp_choice(), &#34;&#34;)
+
+    def test_update(self):
+        &#34;&#34;&#34;Test that updating victors is handled correctly.&#34;&#34;&#34;
+        &#34;&#34;&#34;Test with players &#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        points = 130
+        self.game.curr_player.points_held = points
+        og_sb = leaderboards.Leaderboards.scoreboard
+        self.assertTrue(self.game.update())
+        self.assertEqual(self.game.curr_player.top_scores[0], points)
+        self.assertEqual(
+            self.leaderboards.scoreboard[0].points_held,
+            points
+        )
+        leaderboards.Leaderboards.scoreboard = og_sb
+
+        &#34;&#34;&#34;Testing with computer.&#34;&#34;&#34;
+        self.game.curr_player = computer.Computer
+        self.assertFalse(self.game.update())
+
+    def test_scores(self):
+        &#34;&#34;&#34;Test scores.&#34;&#34;&#34;
+        self.game.player_1 = self.player1
+        self.game.player_2 = self.player2
+        exp = &#34;\t\t\t[ {} : {} points || {} : {} points ]\n&#34;
+        exp = exp.format(
+            self.player1.username,
+            self.player1.points_held,
+            self.player2.username,
+            self.player2.points_held
+            )
+        self.assertEqual(self.game.scores(), exp)
+
+    def test_writer(self):
+        &#34;&#34;&#34;Test sync writer.&#34;&#34;&#34;
+        self.assertEqual(
+                self.game.writer(), synchronization.Sync().pickle_write()
+            )
+
+    def test_reader(self):
+        &#34;&#34;&#34;Test sync reader().&#34;&#34;&#34;
+        self.game.reader()
+        self.assertEqual(
+            self.game.reader(), synchronization.Sync().pickle_read()
+        )
+
+    def test_setfilepath(self):
+        &#34;&#34;&#34;Test setting a new filepath.&#34;&#34;&#34;
+        file1 = synchronization.Sync.file1
+        file2 = synchronization.Sync.file2
+        self.assertEqual(file1, &#34;data/test_users.pickle&#34;)
+        self.assertEqual(file2, &#34;data/test_leaderboards.pickle&#34;)
+        self.game.set_filepath(&#34;file1&#34;, &#34;test.txt&#34;)
+        self.game.set_filepath(&#34;file2&#34;, &#34;test.bin&#34;)
+        self.assertIs(synchronization.Sync.file1, &#34;test.txt&#34;)
+        self.assertIs(synchronization.Sync.file2, &#34;test.bin&#34;)
+        synchronization.Sync.file1 = file1
+        synchronization.Sync.file2 = file2
+
+    def test_error_msg(self):
+        &#34;&#34;&#34;Test error_msg.&#34;&#34;&#34;
+        self.assertIsInstance(self.game.err_msg(), str)
+
+    def test_get_scoreboard(self):
+        &#34;&#34;&#34;Test get_scoreboard.&#34;&#34;&#34;
+        self.assertEqual(
+            self.game.get_scoreboard(),
+            leaderboards.Leaderboards.scoreboard
+        )
+
+    def test_clear_screen(self):
+        &#34;&#34;&#34;Test clear_screen.&#34;&#34;&#34;
+        with patch(&#39;game.Game&#39;) as mock:
+            exp = mock.return_value
+            exp.method = None
+            res = self.game.clear_screen()
+            assert res is None</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="development.game_test.TestGame"><code class="flex name class">
+<span>class <span class="ident">TestGame</span></span>
+<span>(</span><span>methodName='runTest')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ensure everything works.</p>
+<p>Create an instance of the class that will use the named test
+method when executed. Raises a ValueError if the instance does
+not have a method with the specified name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TestGame(unittest.TestCase):
+    &#34;&#34;&#34;Ensure everything works.&#34;&#34;&#34;
+
+    def setUp(self):
+        &#34;&#34;&#34;Run on every test.&#34;&#34;&#34;
+        self.game = game.Game()
+        self.dice = dice.Dice()
+        self.computer = computer.Computer()
+        self.leaderboards = leaderboards.Leaderboards()
+        self.player1 = player.Player(&#34;John&#34;, &#34;test&#34;)
+        self.player2 = player.Player(&#34;Jane&#34;, &#34;test&#34;)
+
+    def tearDown(self) -&gt; None:
+        &#34;&#34;&#34;Tear down everything previously set up after every test.&#34;&#34;&#34;
+        return super().tearDown()
+
+    def test_init(self):
+        &#34;&#34;&#34;Mock sync instance.&#34;&#34;&#34;
+        sync = synchronization.Sync()
+        self.assertTrue(os.path.exists(sync.file1))
+        self.assertTrue(os.path.exists(sync.file2))
+        os.remove(sync.file1)
+        os.remove(sync.file2)
+        self.assertFalse(os.path.exists(sync.file1))
+        self.assertFalse(os.path.exists(sync.file2))
+
+    def test_help(self):
+        &#34;&#34;&#34;Help Menu Test.&#34;&#34;&#34;
+        res = self.game.help()
+        self.assertIsInstance(res, str)
+
+    def test_list_players(self):
+        &#34;&#34;&#34;Testing list_players variable.&#34;&#34;&#34;
+        self.assertEqual(self.game.list_players, [])
+
+    def test_create_player(self):
+        &#34;&#34;&#34;Test Player Creation.&#34;&#34;&#34;
+        &#34;&#34;&#34;ensure object instantiates correctly.&#34;&#34;&#34;
+        self.assertEqual(self.player1.username, &#34;John&#34;)
+        self.assertEqual(self.player1.password, &#34;test&#34;)
+        self.assertEqual(self.player1.wins, 0)
+        self.assertEqual(self.player1.points_held, 0)
+        self.assertEqual(self.player1.top_scores, (0, 0, 0, 0, 0))
+        with self.assertRaises(IndexError):
+            self.player1.top_scores[6]
+
+        &#34;&#34;&#34;test for some of the invalid names.&#34;&#34;&#34;
+        self.assertFalse(self.game.create_player(&#34;Computer test&#34;))
+        self.assertFalse(self.game.create_player(&#34;Pig test&#34;))
+        self.assertFalse(self.game.create_player(&#34;Test test&#34;))
+        self.assertFalse(self.game.create_player(&#34;uSeR test&#34;))
+        self.assertFalse(self.game.create_player(&#34;EXAMPLE test&#34;))
+
+        &#34;&#34;&#34;test for duplicate error handling.&#34;&#34;&#34;
+        self.game.list_players.append(self.player1)
+        info = self.player1.username + &#34; &#34; + self.player1.password
+        with self.assertRaises(AlreadyExists):
+            self.game.create_player(info)
+        self.game.list_players.clear()
+        self.assertTrue(self.game.create_player(&#34;Jane test&#34;))
+
+    def test_show_menu(self):
+        &#34;&#34;&#34;Test main menu is of type String.&#34;&#34;&#34;
+        res = self.game.show_menu()
+        self.assertIsInstance(res, str)
+        self.assertIs(self.game.position, &#34;menu&#34;)
+
+    def test_show_rules(self):
+        &#34;&#34;&#34;Test Show_rules().&#34;&#34;&#34;
+        res = self.game.show_rules()
+        self.assertIsInstance(res, str)
+        self.assertIs(self.game.position, &#34;rules&#34;)
+
+    def test_login(self):
+        &#34;&#34;&#34;Test login.&#34;&#34;&#34;
+        info = &#34;John Test&#34;
+        info2 = &#34;Jane Test&#34;
+        info = info.split(&#34; &#34;)
+        info2 = info2.split(&#34; &#34;)
+
+        with self.assertRaises(TypeError):
+            self.game.login(3)
+
+        &#34;&#34;&#34;Test login with an invalid account.&#34;&#34;&#34;
+        with self.assertRaises(UserNotFound):
+            self.game.login(info)
+
+        &#34;&#34;&#34;Create mock players.&#34;&#34;&#34;
+        self.game.create_player(info)
+        self.game.create_player(info2)
+
+        self.assertTrue(len(self.game.list_players), 2)
+
+        &#34;&#34;&#34;Test login with newly added account.&#34;&#34;&#34;
+        self.assertTrue(self.game.login(info))
+        self.assertTrue(self.game.login(info2))
+        self.assertEqual(self.game.player_1.username, &#34;John&#34;)
+        self.assertEqual(self.game.player_2.username, &#34;Jane&#34;)
+
+    def test_namechange(self):
+        &#34;&#34;&#34;Test namechange.&#34;&#34;&#34;
+        self.game.list_players.append(self.player1)
+        self.game.list_players.append(self.player2)
+        self.assertEqual(len(self.game.list_players), 2)
+
+        &#34;&#34;&#34;Test error handling on already exists.&#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        with self.assertRaises(AlreadyExists):
+            self.game.namechange(&#34;Jane&#34;)
+        self.game.curr_player = self.player2
+        with self.assertRaises(AlreadyExists):
+            self.game.namechange(&#34;John&#34;)
+
+        &#34;&#34;&#34;Test namechange again with b now available.&#34;&#34;&#34;
+        self.game.list_players.remove(self.player2)  # remove Jane
+        self.assertIs(len(self.game.list_players), 1)
+        self.game.curr_player = self.player1
+        self.game.namechange(&#34;Jane&#34;)
+        self.assertIs(self.game.curr_player.username, &#34;Jane&#34;)
+
+    def test_quit(self):
+        &#34;&#34;&#34;Test quitting.&#34;&#34;&#34;
+        with self.assertRaises(SystemExit):
+            self.game.quit()
+
+    def test_start_reset_restart(self):
+        &#34;&#34;&#34;Test behaviours under pre-determined conditions.&#34;&#34;&#34;
+        self.game.player_1 = self.player1
+        self.game.player_2 = self.player2
+        self.game.player_1.points_held = 99
+        self.game.player_1.cheat()
+        self.game.player_2.points_held = 103
+        self.game.player_2.cheat()
+
+        self.game.start_reset_restart()
+
+        &#34;&#34;&#34;player 1.&#34;&#34;&#34;
+        self.assertEqual(self.player1.points_held, 0)
+        self.assertFalse(self.player1.is_cheating)
+        &#34;&#34;&#34;player 2 is player.&#34;&#34;&#34;
+        self.assertEqual(self.player2.points_held, 0)
+        self.assertFalse(self.player2.is_cheating)
+        &#34;&#34;&#34;player 2 is computer.&#34;&#34;&#34;
+        self.game.player_2 = computer.Computer
+        self.game.player_2.points_held = 89
+        self.assertIs(self.game.player_2.points_held, 89)
+        self.game.start_reset_restart()
+        self.assertIs(self.game.player_2.points_held, 0)
+
+    def test_has_won(self):
+        &#34;&#34;&#34;Test if the player has won after holding.&#34;&#34;&#34;
+        self.player1.points_held = 101
+        self.game.curr_player = self.player1
+        self.assertTrue(self.game.has_won())
+        self.player2.points_held = 99
+        self.game.curr_player = self.player2
+        self.assertFalse(self.game.has_won())
+
+    def test_hold_points(self):
+        &#34;&#34;&#34;Test to see if points are held correctly.&#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        self.game.curr_points = 25
+        self.game.hold()
+        self.assertEqual(self.game.curr_player.points_held, 25)
+
+    def test_roll(self):
+        &#34;&#34;&#34;Ensure roll properties and behaviours are called correctly.&#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        self.assertTrue(1 &lt;= self.game.roll() &lt;= 6)
+
+        &#34;&#34;&#34;Test that the added amount from a roll is correct.&#34;&#34;&#34;
+        q = self.game.curr_points = 30
+        r = self.game.roll()
+        self.assertEqual(self.game.curr_points - q, r)
+
+        &#34;&#34;&#34;Test computer.&#34;&#34;&#34;
+        self.game.curr_player = computer.Computer
+        self.assertTrue(1 &lt;= self.game.roll() &lt;= 6)
+        q = self.game.curr_points = 42
+        r = self.game.roll()
+        self.assertEqual(self.game.curr_points - q, r)
+
+    def test_next_player(self):
+        &#34;&#34;&#34;Tests that switching players happens correctly.&#34;&#34;&#34;
+        self.game.player_1 = self.player1
+        self.game.player_2 = self.player2
+        self.game.curr_player = self.player1
+        self.assertEqual(self.game.next_player(), self.player2)
+        self.assertEqual(self.game.next_player(), self.player1)
+        &#34;&#34;&#34;Test reset on action pool is done correctly on computer.&#34;&#34;&#34;
+        name = self.game.curr_player.username
+        self.assertTrue(name == self.game.player_1.username)
+        self.game.player_2 = self.computer
+        &#34;&#34;&#34;Reverse action pool.&#34;&#34;&#34;
+        self.computer.action_pool = list(reversed(self.computer.action_pool))
+        final_ap = list(self.computer.final_action_pool)
+        self.assertNotEqual(self.computer.action_pool, final_ap)
+        &#34;&#34;&#34; Test next_player resets it.&#34;&#34;&#34;
+        self.assertIsInstance(self.game.next_player(), computer.Computer)
+        self.game.next_player()
+        self.computer = computer.Computer
+        self.assertEqual(self.computer.action_pool, final_ap)
+
+    def test_reset_curr_points(self):
+        &#34;&#34;&#34;Test if resetting current points behaves correctly.&#34;&#34;&#34;
+        self.assertEqual(self.game.curr_points, 0)
+        self.game.curr_points = 89
+        self.assertEqual(self.game.curr_points, 89)
+        self.game.reset_curr_points()
+        self.assertEqual(self.game.curr_points, 0)
+
+    def test_create_screen(self):
+        &#34;&#34;&#34;Testi create_screen().&#34;&#34;&#34;
+        msg = &#34;Enter &lt;create&gt; followed by a username and password&#34;
+        self.assertEqual(self.game.create_screen(), msg)
+
+    def test_set_computer(self):
+        &#34;&#34;&#34;Test set_computer().&#34;&#34;&#34;
+        self.assertFalse(isinstance(self.game.player_2, computer.Computer))
+        self.game.set_computer()
+        self.assertEqual(self.game.player_2, computer.Computer)
+
+    def test_set_computer_difficulty(self):
+        &#34;&#34;&#34;Test if computer difficulty can be set correctly by input.&#34;&#34;&#34;
+        computer.Computer.difficulty = &#34;&#34;
+        self.assertTrue(computer.Computer.difficulty == &#34;&#34;)
+
+        &#34;&#34;&#34;Test all options and return strings.&#34;&#34;&#34;
+        options = (&#34;easy&#34;, &#34;normal&#34;, &#34;hard&#34;)
+        for option in options:
+            exp = f&#34;You successfully have selected {option} difficulty!&#34;
+            self.assertEqual(self.game.set_computer_difficulty(option), exp)
+            self.assertTrue(computer.Computer.difficulty == option)
+
+        &#34;&#34;&#34;Reset computer difficulty.&#34;&#34;&#34;
+        computer.Computer.difficulty == &#34;&#34;
+
+    def test_computer_choice(self):
+        &#34;&#34;&#34;Testing computer_choice().&#34;&#34;&#34;
+        self.game.player_2 = computer.Computer()
+        for _ in range(0, 2):
+            self.game.curr_player = self.game.player_2
+            self.game.curr_player.points_held = 0
+            self.assertNotEqual(self.game.comp_choice(), &#34;&#34;)
+
+    def test_update(self):
+        &#34;&#34;&#34;Test that updating victors is handled correctly.&#34;&#34;&#34;
+        &#34;&#34;&#34;Test with players &#34;&#34;&#34;
+        self.game.curr_player = self.player1
+        points = 130
+        self.game.curr_player.points_held = points
+        og_sb = leaderboards.Leaderboards.scoreboard
+        self.assertTrue(self.game.update())
+        self.assertEqual(self.game.curr_player.top_scores[0], points)
+        self.assertEqual(
+            self.leaderboards.scoreboard[0].points_held,
+            points
+        )
+        leaderboards.Leaderboards.scoreboard = og_sb
+
+        &#34;&#34;&#34;Testing with computer.&#34;&#34;&#34;
+        self.game.curr_player = computer.Computer
+        self.assertFalse(self.game.update())
+
+    def test_scores(self):
+        &#34;&#34;&#34;Test scores.&#34;&#34;&#34;
+        self.game.player_1 = self.player1
+        self.game.player_2 = self.player2
+        exp = &#34;\t\t\t[ {} : {} points || {} : {} points ]\n&#34;
+        exp = exp.format(
+            self.player1.username,
+            self.player1.points_held,
+            self.player2.username,
+            self.player2.points_held
+            )
+        self.assertEqual(self.game.scores(), exp)
+
+    def test_writer(self):
+        &#34;&#34;&#34;Test sync writer.&#34;&#34;&#34;
+        self.assertEqual(
+                self.game.writer(), synchronization.Sync().pickle_write()
+            )
+
+    def test_reader(self):
+        &#34;&#34;&#34;Test sync reader().&#34;&#34;&#34;
+        self.game.reader()
+        self.assertEqual(
+            self.game.reader(), synchronization.Sync().pickle_read()
+        )
+
+    def test_setfilepath(self):
+        &#34;&#34;&#34;Test setting a new filepath.&#34;&#34;&#34;
+        file1 = synchronization.Sync.file1
+        file2 = synchronization.Sync.file2
+        self.assertEqual(file1, &#34;data/test_users.pickle&#34;)
+        self.assertEqual(file2, &#34;data/test_leaderboards.pickle&#34;)
+        self.game.set_filepath(&#34;file1&#34;, &#34;test.txt&#34;)
+        self.game.set_filepath(&#34;file2&#34;, &#34;test.bin&#34;)
+        self.assertIs(synchronization.Sync.file1, &#34;test.txt&#34;)
+        self.assertIs(synchronization.Sync.file2, &#34;test.bin&#34;)
+        synchronization.Sync.file1 = file1
+        synchronization.Sync.file2 = file2
+
+    def test_error_msg(self):
+        &#34;&#34;&#34;Test error_msg.&#34;&#34;&#34;
+        self.assertIsInstance(self.game.err_msg(), str)
+
+    def test_get_scoreboard(self):
+        &#34;&#34;&#34;Test get_scoreboard.&#34;&#34;&#34;
+        self.assertEqual(
+            self.game.get_scoreboard(),
+            leaderboards.Leaderboards.scoreboard
+        )
+
+    def test_clear_screen(self):
+        &#34;&#34;&#34;Test clear_screen.&#34;&#34;&#34;
+        with patch(&#39;game.Game&#39;) as mock:
+            exp = mock.return_value
+            exp.method = None
+            res = self.game.clear_screen()
+            assert res is None</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>unittest.case.TestCase</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="development.game_test.TestGame.setUp"><code class="name flex">
+<span>def <span class="ident">setUp</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run on every test.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setUp(self):
+    &#34;&#34;&#34;Run on every test.&#34;&#34;&#34;
+    self.game = game.Game()
+    self.dice = dice.Dice()
+    self.computer = computer.Computer()
+    self.leaderboards = leaderboards.Leaderboards()
+    self.player1 = player.Player(&#34;John&#34;, &#34;test&#34;)
+    self.player2 = player.Player(&#34;Jane&#34;, &#34;test&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.tearDown"><code class="name flex">
+<span>def <span class="ident">tearDown</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Tear down everything previously set up after every test.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tearDown(self) -&gt; None:
+    &#34;&#34;&#34;Tear down everything previously set up after every test.&#34;&#34;&#34;
+    return super().tearDown()</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_clear_screen"><code class="name flex">
+<span>def <span class="ident">test_clear_screen</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test clear_screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_clear_screen(self):
+    &#34;&#34;&#34;Test clear_screen.&#34;&#34;&#34;
+    with patch(&#39;game.Game&#39;) as mock:
+        exp = mock.return_value
+        exp.method = None
+        res = self.game.clear_screen()
+        assert res is None</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_computer_choice"><code class="name flex">
+<span>def <span class="ident">test_computer_choice</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing computer_choice().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_computer_choice(self):
+    &#34;&#34;&#34;Testing computer_choice().&#34;&#34;&#34;
+    self.game.player_2 = computer.Computer()
+    for _ in range(0, 2):
+        self.game.curr_player = self.game.player_2
+        self.game.curr_player.points_held = 0
+        self.assertNotEqual(self.game.comp_choice(), &#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_create_player"><code class="name flex">
+<span>def <span class="ident">test_create_player</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test Player Creation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_create_player(self):
+    &#34;&#34;&#34;Test Player Creation.&#34;&#34;&#34;
+    &#34;&#34;&#34;ensure object instantiates correctly.&#34;&#34;&#34;
+    self.assertEqual(self.player1.username, &#34;John&#34;)
+    self.assertEqual(self.player1.password, &#34;test&#34;)
+    self.assertEqual(self.player1.wins, 0)
+    self.assertEqual(self.player1.points_held, 0)
+    self.assertEqual(self.player1.top_scores, (0, 0, 0, 0, 0))
+    with self.assertRaises(IndexError):
+        self.player1.top_scores[6]
+
+    &#34;&#34;&#34;test for some of the invalid names.&#34;&#34;&#34;
+    self.assertFalse(self.game.create_player(&#34;Computer test&#34;))
+    self.assertFalse(self.game.create_player(&#34;Pig test&#34;))
+    self.assertFalse(self.game.create_player(&#34;Test test&#34;))
+    self.assertFalse(self.game.create_player(&#34;uSeR test&#34;))
+    self.assertFalse(self.game.create_player(&#34;EXAMPLE test&#34;))
+
+    &#34;&#34;&#34;test for duplicate error handling.&#34;&#34;&#34;
+    self.game.list_players.append(self.player1)
+    info = self.player1.username + &#34; &#34; + self.player1.password
+    with self.assertRaises(AlreadyExists):
+        self.game.create_player(info)
+    self.game.list_players.clear()
+    self.assertTrue(self.game.create_player(&#34;Jane test&#34;))</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_create_screen"><code class="name flex">
+<span>def <span class="ident">test_create_screen</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testi create_screen().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_create_screen(self):
+    &#34;&#34;&#34;Testi create_screen().&#34;&#34;&#34;
+    msg = &#34;Enter &lt;create&gt; followed by a username and password&#34;
+    self.assertEqual(self.game.create_screen(), msg)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_error_msg"><code class="name flex">
+<span>def <span class="ident">test_error_msg</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test error_msg.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_error_msg(self):
+    &#34;&#34;&#34;Test error_msg.&#34;&#34;&#34;
+    self.assertIsInstance(self.game.err_msg(), str)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_get_scoreboard"><code class="name flex">
+<span>def <span class="ident">test_get_scoreboard</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test get_scoreboard.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_get_scoreboard(self):
+    &#34;&#34;&#34;Test get_scoreboard.&#34;&#34;&#34;
+    self.assertEqual(
+        self.game.get_scoreboard(),
+        leaderboards.Leaderboards.scoreboard
+    )</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_has_won"><code class="name flex">
+<span>def <span class="ident">test_has_won</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test if the player has won after holding.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_has_won(self):
+    &#34;&#34;&#34;Test if the player has won after holding.&#34;&#34;&#34;
+    self.player1.points_held = 101
+    self.game.curr_player = self.player1
+    self.assertTrue(self.game.has_won())
+    self.player2.points_held = 99
+    self.game.curr_player = self.player2
+    self.assertFalse(self.game.has_won())</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_help"><code class="name flex">
+<span>def <span class="ident">test_help</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Help Menu Test.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_help(self):
+    &#34;&#34;&#34;Help Menu Test.&#34;&#34;&#34;
+    res = self.game.help()
+    self.assertIsInstance(res, str)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_hold_points"><code class="name flex">
+<span>def <span class="ident">test_hold_points</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test to see if points are held correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_hold_points(self):
+    &#34;&#34;&#34;Test to see if points are held correctly.&#34;&#34;&#34;
+    self.game.curr_player = self.player1
+    self.game.curr_points = 25
+    self.game.hold()
+    self.assertEqual(self.game.curr_player.points_held, 25)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_init"><code class="name flex">
+<span>def <span class="ident">test_init</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Mock sync instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_init(self):
+    &#34;&#34;&#34;Mock sync instance.&#34;&#34;&#34;
+    sync = synchronization.Sync()
+    self.assertTrue(os.path.exists(sync.file1))
+    self.assertTrue(os.path.exists(sync.file2))
+    os.remove(sync.file1)
+    os.remove(sync.file2)
+    self.assertFalse(os.path.exists(sync.file1))
+    self.assertFalse(os.path.exists(sync.file2))</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_list_players"><code class="name flex">
+<span>def <span class="ident">test_list_players</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing list_players variable.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_list_players(self):
+    &#34;&#34;&#34;Testing list_players variable.&#34;&#34;&#34;
+    self.assertEqual(self.game.list_players, [])</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_login"><code class="name flex">
+<span>def <span class="ident">test_login</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test login.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_login(self):
+    &#34;&#34;&#34;Test login.&#34;&#34;&#34;
+    info = &#34;John Test&#34;
+    info2 = &#34;Jane Test&#34;
+    info = info.split(&#34; &#34;)
+    info2 = info2.split(&#34; &#34;)
+
+    with self.assertRaises(TypeError):
+        self.game.login(3)
+
+    &#34;&#34;&#34;Test login with an invalid account.&#34;&#34;&#34;
+    with self.assertRaises(UserNotFound):
+        self.game.login(info)
+
+    &#34;&#34;&#34;Create mock players.&#34;&#34;&#34;
+    self.game.create_player(info)
+    self.game.create_player(info2)
+
+    self.assertTrue(len(self.game.list_players), 2)
+
+    &#34;&#34;&#34;Test login with newly added account.&#34;&#34;&#34;
+    self.assertTrue(self.game.login(info))
+    self.assertTrue(self.game.login(info2))
+    self.assertEqual(self.game.player_1.username, &#34;John&#34;)
+    self.assertEqual(self.game.player_2.username, &#34;Jane&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_namechange"><code class="name flex">
+<span>def <span class="ident">test_namechange</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test namechange.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_namechange(self):
+    &#34;&#34;&#34;Test namechange.&#34;&#34;&#34;
+    self.game.list_players.append(self.player1)
+    self.game.list_players.append(self.player2)
+    self.assertEqual(len(self.game.list_players), 2)
+
+    &#34;&#34;&#34;Test error handling on already exists.&#34;&#34;&#34;
+    self.game.curr_player = self.player1
+    with self.assertRaises(AlreadyExists):
+        self.game.namechange(&#34;Jane&#34;)
+    self.game.curr_player = self.player2
+    with self.assertRaises(AlreadyExists):
+        self.game.namechange(&#34;John&#34;)
+
+    &#34;&#34;&#34;Test namechange again with b now available.&#34;&#34;&#34;
+    self.game.list_players.remove(self.player2)  # remove Jane
+    self.assertIs(len(self.game.list_players), 1)
+    self.game.curr_player = self.player1
+    self.game.namechange(&#34;Jane&#34;)
+    self.assertIs(self.game.curr_player.username, &#34;Jane&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_next_player"><code class="name flex">
+<span>def <span class="ident">test_next_player</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Tests that switching players happens correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_next_player(self):
+    &#34;&#34;&#34;Tests that switching players happens correctly.&#34;&#34;&#34;
+    self.game.player_1 = self.player1
+    self.game.player_2 = self.player2
+    self.game.curr_player = self.player1
+    self.assertEqual(self.game.next_player(), self.player2)
+    self.assertEqual(self.game.next_player(), self.player1)
+    &#34;&#34;&#34;Test reset on action pool is done correctly on computer.&#34;&#34;&#34;
+    name = self.game.curr_player.username
+    self.assertTrue(name == self.game.player_1.username)
+    self.game.player_2 = self.computer
+    &#34;&#34;&#34;Reverse action pool.&#34;&#34;&#34;
+    self.computer.action_pool = list(reversed(self.computer.action_pool))
+    final_ap = list(self.computer.final_action_pool)
+    self.assertNotEqual(self.computer.action_pool, final_ap)
+    &#34;&#34;&#34; Test next_player resets it.&#34;&#34;&#34;
+    self.assertIsInstance(self.game.next_player(), computer.Computer)
+    self.game.next_player()
+    self.computer = computer.Computer
+    self.assertEqual(self.computer.action_pool, final_ap)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_quit"><code class="name flex">
+<span>def <span class="ident">test_quit</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test quitting.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_quit(self):
+    &#34;&#34;&#34;Test quitting.&#34;&#34;&#34;
+    with self.assertRaises(SystemExit):
+        self.game.quit()</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_reader"><code class="name flex">
+<span>def <span class="ident">test_reader</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test sync reader().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_reader(self):
+    &#34;&#34;&#34;Test sync reader().&#34;&#34;&#34;
+    self.game.reader()
+    self.assertEqual(
+        self.game.reader(), synchronization.Sync().pickle_read()
+    )</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_reset_curr_points"><code class="name flex">
+<span>def <span class="ident">test_reset_curr_points</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test if resetting current points behaves correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_reset_curr_points(self):
+    &#34;&#34;&#34;Test if resetting current points behaves correctly.&#34;&#34;&#34;
+    self.assertEqual(self.game.curr_points, 0)
+    self.game.curr_points = 89
+    self.assertEqual(self.game.curr_points, 89)
+    self.game.reset_curr_points()
+    self.assertEqual(self.game.curr_points, 0)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_roll"><code class="name flex">
+<span>def <span class="ident">test_roll</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ensure roll properties and behaviours are called correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_roll(self):
+    &#34;&#34;&#34;Ensure roll properties and behaviours are called correctly.&#34;&#34;&#34;
+    self.game.curr_player = self.player1
+    self.assertTrue(1 &lt;= self.game.roll() &lt;= 6)
+
+    &#34;&#34;&#34;Test that the added amount from a roll is correct.&#34;&#34;&#34;
+    q = self.game.curr_points = 30
+    r = self.game.roll()
+    self.assertEqual(self.game.curr_points - q, r)
+
+    &#34;&#34;&#34;Test computer.&#34;&#34;&#34;
+    self.game.curr_player = computer.Computer
+    self.assertTrue(1 &lt;= self.game.roll() &lt;= 6)
+    q = self.game.curr_points = 42
+    r = self.game.roll()
+    self.assertEqual(self.game.curr_points - q, r)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_scores"><code class="name flex">
+<span>def <span class="ident">test_scores</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test scores.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_scores(self):
+    &#34;&#34;&#34;Test scores.&#34;&#34;&#34;
+    self.game.player_1 = self.player1
+    self.game.player_2 = self.player2
+    exp = &#34;\t\t\t[ {} : {} points || {} : {} points ]\n&#34;
+    exp = exp.format(
+        self.player1.username,
+        self.player1.points_held,
+        self.player2.username,
+        self.player2.points_held
+        )
+    self.assertEqual(self.game.scores(), exp)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_set_computer"><code class="name flex">
+<span>def <span class="ident">test_set_computer</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test set_computer().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_set_computer(self):
+    &#34;&#34;&#34;Test set_computer().&#34;&#34;&#34;
+    self.assertFalse(isinstance(self.game.player_2, computer.Computer))
+    self.game.set_computer()
+    self.assertEqual(self.game.player_2, computer.Computer)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_set_computer_difficulty"><code class="name flex">
+<span>def <span class="ident">test_set_computer_difficulty</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test if computer difficulty can be set correctly by input.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_set_computer_difficulty(self):
+    &#34;&#34;&#34;Test if computer difficulty can be set correctly by input.&#34;&#34;&#34;
+    computer.Computer.difficulty = &#34;&#34;
+    self.assertTrue(computer.Computer.difficulty == &#34;&#34;)
+
+    &#34;&#34;&#34;Test all options and return strings.&#34;&#34;&#34;
+    options = (&#34;easy&#34;, &#34;normal&#34;, &#34;hard&#34;)
+    for option in options:
+        exp = f&#34;You successfully have selected {option} difficulty!&#34;
+        self.assertEqual(self.game.set_computer_difficulty(option), exp)
+        self.assertTrue(computer.Computer.difficulty == option)
+
+    &#34;&#34;&#34;Reset computer difficulty.&#34;&#34;&#34;
+    computer.Computer.difficulty == &#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_setfilepath"><code class="name flex">
+<span>def <span class="ident">test_setfilepath</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test setting a new filepath.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_setfilepath(self):
+    &#34;&#34;&#34;Test setting a new filepath.&#34;&#34;&#34;
+    file1 = synchronization.Sync.file1
+    file2 = synchronization.Sync.file2
+    self.assertEqual(file1, &#34;data/test_users.pickle&#34;)
+    self.assertEqual(file2, &#34;data/test_leaderboards.pickle&#34;)
+    self.game.set_filepath(&#34;file1&#34;, &#34;test.txt&#34;)
+    self.game.set_filepath(&#34;file2&#34;, &#34;test.bin&#34;)
+    self.assertIs(synchronization.Sync.file1, &#34;test.txt&#34;)
+    self.assertIs(synchronization.Sync.file2, &#34;test.bin&#34;)
+    synchronization.Sync.file1 = file1
+    synchronization.Sync.file2 = file2</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_show_menu"><code class="name flex">
+<span>def <span class="ident">test_show_menu</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test main menu is of type String.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_show_menu(self):
+    &#34;&#34;&#34;Test main menu is of type String.&#34;&#34;&#34;
+    res = self.game.show_menu()
+    self.assertIsInstance(res, str)
+    self.assertIs(self.game.position, &#34;menu&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_show_rules"><code class="name flex">
+<span>def <span class="ident">test_show_rules</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test Show_rules().</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_show_rules(self):
+    &#34;&#34;&#34;Test Show_rules().&#34;&#34;&#34;
+    res = self.game.show_rules()
+    self.assertIsInstance(res, str)
+    self.assertIs(self.game.position, &#34;rules&#34;)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_start_reset_restart"><code class="name flex">
+<span>def <span class="ident">test_start_reset_restart</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test behaviours under pre-determined conditions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_start_reset_restart(self):
+    &#34;&#34;&#34;Test behaviours under pre-determined conditions.&#34;&#34;&#34;
+    self.game.player_1 = self.player1
+    self.game.player_2 = self.player2
+    self.game.player_1.points_held = 99
+    self.game.player_1.cheat()
+    self.game.player_2.points_held = 103
+    self.game.player_2.cheat()
+
+    self.game.start_reset_restart()
+
+    &#34;&#34;&#34;player 1.&#34;&#34;&#34;
+    self.assertEqual(self.player1.points_held, 0)
+    self.assertFalse(self.player1.is_cheating)
+    &#34;&#34;&#34;player 2 is player.&#34;&#34;&#34;
+    self.assertEqual(self.player2.points_held, 0)
+    self.assertFalse(self.player2.is_cheating)
+    &#34;&#34;&#34;player 2 is computer.&#34;&#34;&#34;
+    self.game.player_2 = computer.Computer
+    self.game.player_2.points_held = 89
+    self.assertIs(self.game.player_2.points_held, 89)
+    self.game.start_reset_restart()
+    self.assertIs(self.game.player_2.points_held, 0)</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_update"><code class="name flex">
+<span>def <span class="ident">test_update</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test that updating victors is handled correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_update(self):
+    &#34;&#34;&#34;Test that updating victors is handled correctly.&#34;&#34;&#34;
+    &#34;&#34;&#34;Test with players &#34;&#34;&#34;
+    self.game.curr_player = self.player1
+    points = 130
+    self.game.curr_player.points_held = points
+    og_sb = leaderboards.Leaderboards.scoreboard
+    self.assertTrue(self.game.update())
+    self.assertEqual(self.game.curr_player.top_scores[0], points)
+    self.assertEqual(
+        self.leaderboards.scoreboard[0].points_held,
+        points
+    )
+    leaderboards.Leaderboards.scoreboard = og_sb
+
+    &#34;&#34;&#34;Testing with computer.&#34;&#34;&#34;
+    self.game.curr_player = computer.Computer
+    self.assertFalse(self.game.update())</code></pre>
+</details>
+</dd>
+<dt id="development.game_test.TestGame.test_writer"><code class="name flex">
+<span>def <span class="ident">test_writer</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test sync writer.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_writer(self):
+    &#34;&#34;&#34;Test sync writer.&#34;&#34;&#34;
+    self.assertEqual(
+            self.game.writer(), synchronization.Sync().pickle_write()
+        )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="development" href="index.html">development</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="development.game_test.TestGame" href="#development.game_test.TestGame">TestGame</a></code></h4>
+<ul class="">
+<li><code><a title="development.game_test.TestGame.setUp" href="#development.game_test.TestGame.setUp">setUp</a></code></li>
+<li><code><a title="development.game_test.TestGame.tearDown" href="#development.game_test.TestGame.tearDown">tearDown</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_clear_screen" href="#development.game_test.TestGame.test_clear_screen">test_clear_screen</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_computer_choice" href="#development.game_test.TestGame.test_computer_choice">test_computer_choice</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_create_player" href="#development.game_test.TestGame.test_create_player">test_create_player</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_create_screen" href="#development.game_test.TestGame.test_create_screen">test_create_screen</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_error_msg" href="#development.game_test.TestGame.test_error_msg">test_error_msg</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_get_scoreboard" href="#development.game_test.TestGame.test_get_scoreboard">test_get_scoreboard</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_has_won" href="#development.game_test.TestGame.test_has_won">test_has_won</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_help" href="#development.game_test.TestGame.test_help">test_help</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_hold_points" href="#development.game_test.TestGame.test_hold_points">test_hold_points</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_init" href="#development.game_test.TestGame.test_init">test_init</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_list_players" href="#development.game_test.TestGame.test_list_players">test_list_players</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_login" href="#development.game_test.TestGame.test_login">test_login</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_namechange" href="#development.game_test.TestGame.test_namechange">test_namechange</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_next_player" href="#development.game_test.TestGame.test_next_player">test_next_player</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_quit" href="#development.game_test.TestGame.test_quit">test_quit</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_reader" href="#development.game_test.TestGame.test_reader">test_reader</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_reset_curr_points" href="#development.game_test.TestGame.test_reset_curr_points">test_reset_curr_points</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_roll" href="#development.game_test.TestGame.test_roll">test_roll</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_scores" href="#development.game_test.TestGame.test_scores">test_scores</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_set_computer" href="#development.game_test.TestGame.test_set_computer">test_set_computer</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_set_computer_difficulty" href="#development.game_test.TestGame.test_set_computer_difficulty">test_set_computer_difficulty</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_setfilepath" href="#development.game_test.TestGame.test_setfilepath">test_setfilepath</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_show_menu" href="#development.game_test.TestGame.test_show_menu">test_show_menu</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_show_rules" href="#development.game_test.TestGame.test_show_rules">test_show_rules</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_start_reset_restart" href="#development.game_test.TestGame.test_start_reset_restart">test_start_reset_restart</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_update" href="#development.game_test.TestGame.test_update">test_update</a></code></li>
+<li><code><a title="development.game_test.TestGame.test_writer" href="#development.game_test.TestGame.test_writer">test_writer</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
