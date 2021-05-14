@@ -205,3 +205,83 @@ class Shell(cmd.Cmd):
                 self.computer_logic()
         else:
             print(self.game.err_msg())
+
+    
+    def do_h(self, _):
+        """Run do_hold()."""
+        return self.do_hold(_)
+
+    def update_won(self, name, total):
+        """Check if won."""
+        if self.game.has_won():
+            self.game.clear_screen()
+
+            """write data if curr player is player obj."""
+            if isinstance(self.game.curr_player, game.Game.curr_player):
+                self.game.curr_player.add_win()
+                if name == self.game.player_2.username:
+                    """ player 1 is always player obj"""
+                    self.game.player_2 = self.game.curr_player
+                    self.game.player_1.add_losses()
+                else:
+                    self.game.player_1 = self.game.curr_player
+                    if self.game.player_2.username != "Computer":
+                        self.game.player_2.add_losses()
+                for player in self.game.list_players:
+                    if player.username == name:
+                        player = self.game.curr_player
+                self.game.update()
+                # self.game.curr_player.reset()
+                self.game.writer()
+                self.game.reader()
+                if self.game.curr_player == self.game.player_1:
+                    self.game.player_1 = self.game.curr_player
+                elif self.game.curr_player == self.game.player_2:
+                    self.game.player_2 == self.game.curr_player
+            else:
+                self.game.player_1.add_losses()
+
+            """reset player 2."""
+            p2_msg = f"{self.game.player_2.username} has been logged out!"
+            self.game.player_2 = game.Game.player_2
+
+            """Print victory message and reset main menu."""
+            victory_msg = ">>  Congratulations, {}! You won with {} points!"
+            print(f"\n\n{victory_msg.format(name, total)}")
+            print(f">>  {p2_msg}\n\n")
+            print(self.game.show_menu())
+            return True
+        else:
+            return False
+
+    def computer_logic(self):
+        """Logic powering computer/AI decisions(can't be called by cmdloop)."""
+        action = ""
+        while self.game.curr_player == self.game.player_2:
+
+            if self.game.curr_points == 0:
+                action = "roll"
+            else:
+                action = self.game.comp_choice()
+
+            print(f"{self.prompt} ", flush=True, end="")
+            sleep(0.6)
+            print(action)
+
+            if action == "roll":
+                self.do_roll(action)
+            elif action == "hold":
+                self.do_hold(action)
+
+    def do_quit(self, _):
+        """Terminate game."""
+        print("Bye!")
+        self.game.quit()
+
+    def do_q(self, _):
+        """Run do_quit()."""
+        self.do_quit(_)
+
+    def scores(self):
+        """Return player scores."""
+        return [self.game.player_1.points_held, self.game.player_2.points_held]
