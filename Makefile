@@ -19,3 +19,15 @@ venv:
 	@printf "On Windows (bash terminal), do:\n"
 	@printf ". .venv/Scripts/activate\n"
 	@printf "Type 'deactivate' to deactivate.\n"
+
+
+install:
+	$(PYTHON) -m pip install -r requirements.txt
+
+installed:
+	$(PYTHON) -m pip list
+
+clean:
+	rm -f .coverage *.pyc
+	rm -rf __pycache__
+	rm -rf htmlcov
