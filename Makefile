@@ -40,3 +40,20 @@ clean-all: clean clean-doc
 
 unittest:
 	$(PYTHON) -m unittest discover . "*_test.py"
+
+
+coverage:
+	coverage run -m unittest discover . "*_test.py"
+	coverage html
+	coverage report -m
+
+pylint:
+	pylint *.py
+
+flake8:
+	flake8
+
+pydoc:
+	install -d doc/pydoc
+	$(PYTHON) -m pydoc -w "$(PWD)"
+	mv *.html doc/pydoc
