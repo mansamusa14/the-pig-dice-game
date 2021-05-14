@@ -72,3 +72,10 @@ pyreverse:
 	dot -Tpng packages.dot -o doc/uml/packages.png
 	rm -f classes.dot packages.dot
 	ls -l doc/uml
+
+radon-cc:
+	radon cc . -a
+
+radon-mi:
+	radon mi .
+
