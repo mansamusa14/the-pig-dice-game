@@ -81,3 +81,6 @@ radon-mi:
 
 radon-raw:
 	radon raw .
+
+radon-hal:
+	radon hal .
