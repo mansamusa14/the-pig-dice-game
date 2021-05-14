@@ -90,3 +90,5 @@ bandit:
 	bandit -r .
 
 lint: flake8 pylint
+
+test: lint coverage
