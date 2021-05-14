@@ -57,3 +57,18 @@ pydoc:
 	install -d doc/pydoc
 	$(PYTHON) -m pydoc -w "$(PWD)"
 	mv *.html doc/pydoc
+
+
+pdoc:
+	rm -rf doc/api
+	pdoc --html -o doc/api .
+
+doc: pdoc pyreverse #pydoc sphinx
+
+pyreverse:
+	install -d doc/uml
+	pyreverse *.py
+	dot -Tpng classes.dot -o doc/uml/classes.png
+	dot -Tpng packages.dot -o doc/uml/packages.png
+	rm -f classes.dot packages.dot
+	ls -l doc/uml
